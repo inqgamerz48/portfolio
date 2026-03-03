@@ -6,62 +6,72 @@ import { ArrowDown } from 'lucide-react'
 export function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col justify-center px-6 lg:px-8 overflow-hidden">
-      {/* Ambient glow — single corner-anchored gradient */}
-      <div className="ambient-glow" />
+      {/* Atmospheric crimson glow */}
+      <div className="crimson-glow" />
+
+      {/* Floating ember particles */}
+      <div className="particle" />
+      <div className="particle" />
+      <div className="particle" />
+      <div className="particle" />
+
+      {/* Kanji background decoration — 鍛 (forge) */}
+      <div className="kanji-bg right-[5%] top-[10%]" aria-hidden="true">鍛</div>
 
       <div className="max-w-6xl mx-auto w-full relative z-10">
         {/* Eyebrow */}
         <motion.p
           initial={{ opacity: 0 }}
-          animate={{ opacity: 0.7 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.3 }}
           className="section-eyebrow mb-8"
         >
           Full Stack Developer · Systems Builder
         </motion.p>
 
-        {/* Main title — massive serif, staggered */}
+        {/* Main title — dramatic staggered reveal */}
         <div className="overflow-hidden">
           <motion.h1
-            initial={{ y: '100%' }}
+            initial={{ y: '110%' }}
             animate={{ y: 0 }}
-            transition={{ duration: 0.8, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
-            className="text-display text-fg"
+            transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
+            className="text-display text-parchment"
           >
-            I build things
+            I forge
           </motion.h1>
         </div>
         <div className="overflow-hidden">
           <motion.h1
-            initial={{ y: '100%' }}
+            initial={{ y: '110%' }}
             animate={{ y: 0 }}
-            transition={{ duration: 0.8, delay: 0.55, ease: [0.16, 1, 0.3, 1] }}
+            transition={{ duration: 0.7, delay: 0.65, ease: [0.16, 1, 0.3, 1] }}
             className="text-display"
           >
-            that <em className="text-ember-glow not-italic">ship.</em>
+            systems that{' '}
+            <em className="not-italic text-blood-glow">ship.</em>
           </motion.h1>
         </div>
 
         {/* Subtitle */}
         <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1 }}
-          className="mt-10 max-w-lg text-ash text-lg leading-relaxed"
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.1 }}
+          className="mt-10 max-w-lg text-mist text-lg leading-relaxed"
         >
           Solo developer building production-grade SaaS platforms,
           enterprise systems, and AI-integrated products.
           Not prototypes — products people use.
         </motion.p>
 
-        {/* Single CTA */}
+        {/* CTA */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.3 }}
+          initial={{ opacity: 0, y: 10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 1.4 }}
           className="mt-12"
         >
-          <a href="#projects" className="btn-primary">
+          <a href="#projects" className="btn-blade">
             View Work
           </a>
         </motion.div>
@@ -71,14 +81,14 @@ export function Hero() {
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 0.3 }}
-        transition={{ duration: 0.6, delay: 2 }}
+        transition={{ duration: 0.6, delay: 2.2 }}
         className="absolute bottom-10 left-1/2 -translate-x-1/2"
       >
         <motion.div
           animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+          transition={{ duration: 2.5, repeat: Infinity, ease: 'easeInOut' }}
         >
-          <ArrowDown size={16} className="text-ash" />
+          <ArrowDown size={16} className="text-blood" />
         </motion.div>
       </motion.div>
     </section>

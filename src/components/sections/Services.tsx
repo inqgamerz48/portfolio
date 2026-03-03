@@ -36,14 +36,16 @@ const tiers = [
 export function Services() {
   return (
     <section id="services" className="section-wrapper relative">
-      <div className="section-inner max-w-4xl mx-auto">
+      <div className="slash-divider" />
+
+      <div className="section-inner max-w-5xl mx-auto">
         <motion.p
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.7 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="section-eyebrow mb-6"
         >
-          Services
+          Services & Pricing
         </motion.p>
 
         <motion.h2
@@ -51,60 +53,52 @@ export function Services() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-heading text-fg mb-16"
+          className="text-heading text-parchment mb-16"
         >
-          What I build for clients.
+          Commission a blade.
         </motion.h2>
 
-        {/* Editorial table layout */}
-        <div className="space-y-0">
+        <div className="grid md:grid-cols-2 gap-5">
           {tiers.map((tier, i) => (
             <motion.div
               key={tier.name}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className={`py-10 border-t border-[rgba(200,180,160,0.08)] ${tier.popular ? 'bg-[rgba(212,65,42,0.03)] -mx-6 px-6 lg:-mx-10 lg:px-10' : ''
+              className={`anime-card p-7 md:p-8 flex flex-col ${tier.popular ? 'border-blood/30 ring-1 ring-blood/10' : ''
                 }`}
             >
-              <div className="grid grid-cols-12 gap-4 items-start">
-                {/* Tier name & price */}
-                <div className="col-span-12 lg:col-span-4">
-                  <div className="flex items-center gap-3">
-                    <h3 className="font-serif text-2xl lg:text-3xl text-fg">
-                      {tier.name}
-                    </h3>
-                    {tier.popular && (
-                      <span className="text-mono text-ember text-[10px]">Popular</span>
-                    )}
-                  </div>
-                  <p className="text-ash mt-1">{tier.description}</p>
-                  <p className="font-serif text-xl text-bone mt-3">{tier.price}</p>
-                </div>
-
-                {/* Features */}
-                <div className="col-span-12 lg:col-span-6 lg:col-start-6 mt-4 lg:mt-0">
-                  <ul className="space-y-2">
-                    {tier.features.map((f) => (
-                      <li key={f} className="text-ash flex items-baseline gap-3">
-                        <span className="text-charcoal select-none">—</span>
-                        {f}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                {/* CTA */}
-                <div className="col-span-12 lg:col-span-2 lg:col-start-12 mt-4 lg:mt-0 flex lg:justify-end">
-                  <a href="#contact" className="btn-ghost">
-                    Start
-                  </a>
-                </div>
+              {/* Header */}
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="font-serif text-xl md:text-2xl font-black text-parchment">
+                  {tier.name}
+                </h3>
+                {tier.popular && (
+                  <span className="text-mono text-blood text-[9px] bg-blood/10 px-2 py-1 rounded-sm">
+                    Popular
+                  </span>
+                )}
               </div>
+
+              <p className="text-mist mb-2">{tier.description}</p>
+              <p className="font-serif text-2xl font-black text-gold mb-6">{tier.price}</p>
+
+              {/* Features */}
+              <ul className="space-y-2.5 flex-grow mb-8">
+                {tier.features.map((f) => (
+                  <li key={f} className="text-mist text-sm flex items-baseline gap-3">
+                    <span className="text-blood text-xs">▸</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <a href="#contact" className="btn-blade text-center w-full">
+                Get Started
+              </a>
             </motion.div>
           ))}
-          <div className="border-t border-[rgba(200,180,160,0.08)]" />
         </div>
       </div>
     </section>

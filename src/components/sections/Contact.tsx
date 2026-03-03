@@ -32,10 +32,15 @@ export function Contact() {
 
   return (
     <section id="contact" className="section-wrapper relative">
-      <div className="section-inner max-w-4xl mx-auto">
+      <div className="slash-divider" />
+
+      {/* Atmospheric glow */}
+      <div className="absolute bottom-0 left-0 w-1/2 h-1/2 bg-gradient-radial from-blood/3 to-transparent pointer-events-none" />
+
+      <div className="section-inner max-w-4xl mx-auto relative z-10">
         <motion.p
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.7 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="section-eyebrow mb-6"
         >
@@ -47,9 +52,9 @@ export function Contact() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-heading text-fg mb-16"
+          className="text-heading text-parchment mb-16"
         >
-          Let&apos;s build something.
+          Ready to forge something?
         </motion.h2>
 
         <div className="grid lg:grid-cols-2 gap-16">
@@ -60,7 +65,7 @@ export function Contact() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="space-y-8"
+            className="space-y-6"
           >
             <div>
               <label className="text-mono text-ash block mb-3">Name</label>
@@ -68,7 +73,8 @@ export function Contact() {
                 type="text"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="input-warm"
+                className="input-anime"
+                placeholder="Your name"
                 required
               />
             </div>
@@ -79,7 +85,8 @@ export function Contact() {
                 type="email"
                 value={formData.email}
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="input-warm"
+                className="input-anime"
+                placeholder="your@email.com"
                 required
               />
             </div>
@@ -89,7 +96,8 @@ export function Contact() {
               <textarea
                 value={formData.message}
                 onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                className="input-warm"
+                className="input-anime"
+                placeholder="Tell me about your project..."
                 rows={5}
                 required
               />
@@ -98,17 +106,17 @@ export function Contact() {
             <button
               type="submit"
               disabled={status === 'sending'}
-              className="btn-primary"
+              className="btn-blade"
             >
               {status === 'sending' ? 'Sending...' : 'Send message'}
               <Send size={14} />
             </button>
 
             {status === 'success' && (
-              <p className="text-mono text-ember mt-4">Message sent. I&apos;ll respond soon.</p>
+              <p className="text-mono text-blood mt-4">Message received. I&apos;ll respond soon.</p>
             )}
             {status === 'error' && (
-              <p className="text-mono text-[#ff4444] mt-4">Something went wrong. Try again.</p>
+              <p className="text-mono text-flame mt-4">Something went wrong. Try again.</p>
             )}
           </motion.form>
 
@@ -122,19 +130,19 @@ export function Contact() {
           >
             <div>
               <p className="text-mono text-ash mb-2">Email</p>
-              <a href="mailto:inqgamerz48@gmail.com" className="text-fg hover:text-ember transition-colors">
+              <a href="mailto:inqgamerz48@gmail.com" className="text-parchment hover:text-flame transition-colors">
                 inqgamerz48@gmail.com
               </a>
             </div>
             <div>
               <p className="text-mono text-ash mb-2">GitHub</p>
-              <a href="https://github.com/inqgamerz48" target="_blank" rel="noopener noreferrer" className="text-fg hover:text-ember transition-colors">
+              <a href="https://github.com/inqgamerz48" target="_blank" rel="noopener noreferrer" className="text-parchment hover:text-flame transition-colors">
                 github.com/inqgamerz48
               </a>
             </div>
             <div>
               <p className="text-mono text-ash mb-2">Based in</p>
-              <p className="text-fg">Visakhapatnam, India</p>
+              <p className="text-parchment">Visakhapatnam, India</p>
             </div>
           </motion.div>
         </div>

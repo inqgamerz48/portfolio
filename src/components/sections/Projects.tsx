@@ -30,11 +30,12 @@ const projects = [
 export function Projects() {
   return (
     <section id="projects" className="section-wrapper relative">
-      <div className="section-inner max-w-4xl mx-auto">
-        {/* Eyebrow */}
+      <div className="slash-divider" />
+
+      <div className="section-inner max-w-5xl mx-auto">
         <motion.p
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.7 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="section-eyebrow mb-6"
         >
@@ -46,43 +47,45 @@ export function Projects() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-heading text-fg mb-16"
+          className="text-heading text-parchment mb-16"
         >
-          Products that exist in production.
+          Blades forged in production.
         </motion.h2>
 
-        {/* Project list — editorial, ruled */}
-        <div className="space-y-0">
+        {/* Project cards */}
+        <div className="space-y-6">
           {projects.map((project, i) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 15 }}
+              initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="group py-10 border-t border-[rgba(200,180,160,0.08)]"
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="anime-card p-8 md:p-10 group"
             >
-              <div className="grid grid-cols-12 gap-4">
-                {/* Number */}
-                <span className="col-span-1 text-mono text-charcoal pt-2">
-                  {String(i + 1).padStart(2, '0')}
-                </span>
+              <div className="flex flex-col lg:flex-row lg:items-start gap-6">
+                <div className="flex-1">
+                  {/* Number + title */}
+                  <div className="flex items-baseline gap-4 mb-4">
+                    <span className="text-mono text-steel text-[10px]">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                    <h3 className="font-serif text-3xl lg:text-4xl font-black text-parchment group-hover:text-flame transition-colors duration-300">
+                      {project.title}
+                    </h3>
+                  </div>
 
-                {/* Content */}
-                <div className="col-span-11 lg:col-span-7">
-                  <h3 className="font-serif text-3xl lg:text-4xl text-fg group-hover:text-ember-glow transition-colors duration-300">
-                    {project.title}
-                  </h3>
-                  <p className="mt-4 text-ash leading-relaxed">
+                  <p className="text-mist leading-relaxed mb-5 max-w-2xl">
                     {project.description}
                   </p>
-                  <p className="mt-4 text-mono text-bone opacity-50">
+
+                  <p className="text-mono text-ash text-[10px]">
                     {project.stack}
                   </p>
                 </div>
 
                 {/* Links */}
-                <div className="col-span-11 lg:col-span-4 lg:col-start-9 flex items-start gap-6 mt-4 lg:mt-2 lg:justify-end">
+                <div className="flex items-center gap-6 lg:pt-2">
                   {project.githubUrl && (
                     <a
                       href={project.githubUrl}
@@ -107,8 +110,6 @@ export function Projects() {
               </div>
             </motion.div>
           ))}
-          {/* Bottom border */}
-          <div className="border-t border-[rgba(200,180,160,0.08)]" />
         </div>
 
         {/* View all */}
@@ -116,7 +117,7 @@ export function Projects() {
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
+          transition={{ delay: 0.2 }}
           className="mt-12"
         >
           <a

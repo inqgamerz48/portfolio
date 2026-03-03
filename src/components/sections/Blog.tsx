@@ -28,23 +28,21 @@ export function Blog() {
       .catch(() => setLoading(false))
   }, [])
 
-  const formatDate = (dateStr: string) => {
-    return new Date(dateStr).toLocaleDateString('en-US', {
-      month: 'short',
-      year: 'numeric',
-    })
-  }
+  const formatDate = (dateStr: string) =>
+    new Date(dateStr).toLocaleDateString('en-US', { month: 'short', year: 'numeric' })
 
   return (
     <section id="blog" className="section-wrapper relative">
+      <div className="slash-divider" />
+
       <div className="section-inner max-w-4xl mx-auto">
         <motion.p
           initial={{ opacity: 0 }}
-          whileInView={{ opacity: 0.7 }}
+          whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           className="section-eyebrow mb-6"
         >
-          Writing
+          Chronicles
         </motion.p>
 
         <motion.h2
@@ -52,19 +50,18 @@ export function Blog() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-heading text-fg mb-16"
+          className="text-heading text-parchment mb-16"
         >
-          Thoughts & insights.
+          Battle logs & insights.
         </motion.h2>
 
-        {/* Loading state */}
+        {/* Loading skeleton */}
         {loading && (
           <div className="space-y-0">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="py-8 border-t border-[rgba(200,180,160,0.08)]">
-                <div className="h-3 w-20 bg-smoke rounded animate-pulse mb-3" />
-                <div className="h-6 w-3/4 bg-smoke rounded animate-pulse mb-2" />
-                <div className="h-3 w-16 bg-smoke rounded animate-pulse" />
+              <div key={i} className="py-7 border-t border-blood/8">
+                <div className="h-3 w-20 bg-ink rounded animate-pulse mb-3" />
+                <div className="h-5 w-3/4 bg-ink rounded animate-pulse" />
               </div>
             ))}
           </div>
@@ -72,55 +69,50 @@ export function Blog() {
 
         {/* Empty state */}
         {!loading && posts.length === 0 && (
-          <p className="text-ash">No posts yet. Check back soon.</p>
+          <p className="text-mist">No chronicles yet. Check back soon.</p>
         )}
 
-        {/* Post list — editorial */}
+        {/* Post list */}
         {!loading && posts.length > 0 && (
-          <div className="space-y-0">
+          <div>
             {posts.map((post, i) => (
               <motion.div
                 key={post.id}
                 initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
+                transition={{ duration: 0.3, delay: i * 0.06 }}
               >
                 <a
                   href={`/blog/${post.slug}`}
-                  className="group py-8 border-t border-[rgba(200,180,160,0.08)] grid grid-cols-12 gap-4 items-baseline block"
+                  className="group block py-7 border-t border-blood/8 hover:bg-ink/30 transition-colors duration-300 -mx-4 px-4"
                 >
-                  {/* Date */}
-                  <span className="col-span-3 lg:col-span-2 text-mono text-charcoal">
-                    {formatDate(post.createdAt)}
-                  </span>
-
-                  {/* Title */}
-                  <h3 className="col-span-7 lg:col-span-8 font-serif text-xl lg:text-2xl text-fg group-hover:text-ember-glow transition-colors duration-300">
-                    {post.title}
-                  </h3>
-
-                  {/* Category */}
-                  <span className="col-span-2 text-right text-mono text-ash opacity-50">
-                    {post.category}
-                  </span>
+                  <div className="flex flex-col md:flex-row md:items-baseline gap-2 md:gap-6">
+                    <span className="text-mono text-steel shrink-0 w-20">
+                      {formatDate(post.createdAt)}
+                    </span>
+                    <h3 className="font-serif text-xl lg:text-2xl font-black text-parchment group-hover:text-flame transition-colors duration-300 flex-1">
+                      {post.title}
+                    </h3>
+                    <span className="text-mono text-ash text-[10px] shrink-0">
+                      {post.category}
+                    </span>
+                  </div>
                 </a>
               </motion.div>
             ))}
-            <div className="border-t border-[rgba(200,180,160,0.08)]" />
+            <div className="border-t border-blood/8" />
           </div>
         )}
 
-        {/* View all */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
           className="mt-12"
         >
           <a href="/blog" className="btn-ghost">
-            All posts <ArrowUpRight size={12} />
+            All chronicles <ArrowUpRight size={12} />
           </a>
         </motion.div>
       </div>
