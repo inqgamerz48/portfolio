@@ -9,17 +9,38 @@ export const metadata: Metadata = {
   authors: [{ name: "INQ" }],
 };
 
+import { ThemeProvider } from "@/components/ThemeProvider";
+
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className="antialiased">
-        <CustomCursor />
-        {children}
-        <div className="grain-overlay" aria-hidden="true" />
+    <html lang="en" suppressHydrationWarning>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  var stored = localStorage.getItem('INQ_THEME');
+                  var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+                  if (stored === 'light' || (!stored && prefersLight)) {
+                    document.documentElement.classList.add('light');
+                  }
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
+      </head>
+      <body className="antialiased transition-colors duration-500">
+        <ThemeProvider>
+          <CustomCursor />
+          {children}
+          <div className="grain-overlay" aria-hidden="true" />
+        </ThemeProvider>
       </body>
     </html>
   );

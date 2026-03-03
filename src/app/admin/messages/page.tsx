@@ -82,7 +82,7 @@ export default function MessagesPage() {
       ) : (
         <div className="grid lg:grid-cols-[1fr_1.5fr] gap-8 lg:gap-12">
           {/* Messages List - Compact Left Side */}
-          <div className="space-y-4 max-h-[80vh] overflow-y-auto pr-2 scrollbar-thin">
+          <div className="space-y-6 max-h-[80vh] overflow-y-auto pr-2 scrollbar-thin">
             {messages.map((message) => (
               <motion.div
                 key={message.id}
@@ -138,7 +138,7 @@ export default function MessagesPage() {
             className="lg:sticky lg:top-24 h-fit"
           >
             {selectedMessage ? (
-              <div className="bg-ink border border-parchment/10 p-8 sm:p-12 relative overflow-hidden">
+              <div className="bg-ink border border-parchment/10 p-10 sm:p-14 relative overflow-hidden">
                 {/* Decorative background element */}
                 <div className="absolute top-0 right-0 w-64 h-64 bg-blood/5 rounded-full blur-[100px] pointer-events-none" />
 

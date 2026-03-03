@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
+import { ThemeToggle } from '../ThemeToggle'
 
 const navItems = [
   { label: 'About', href: '#about' },
@@ -52,10 +53,13 @@ export function Navbar() {
               </a>
             ))}
 
-            {/* Available for work */}
-            <div className="flex items-center gap-2 ml-4 pl-4 border-l border-parchment/[0.06]">
-              <span className="status-dot" />
-              <span className="text-mono-sm text-green/70">Available</span>
+            {/* Available for work & Theme Toggle */}
+            <div className="flex items-center gap-4 ml-4 pl-4 border-l border-parchment/[0.06]">
+              <div className="flex items-center gap-2 pr-2 border-r border-parchment/[0.06]">
+                <span className="status-dot" />
+                <span className="text-mono-sm text-green/70">Available</span>
+              </div>
+              <ThemeToggle />
             </div>
           </div>
 
@@ -82,9 +86,12 @@ export function Navbar() {
             transition={{ duration: 0.3 }}
             className="fixed inset-0 z-40 bg-void flex flex-col items-start justify-center px-8"
           >
-            <div className="flex items-center gap-2 mb-12">
-              <span className="status-dot" />
-              <span className="text-mono-sm text-green/70">Available for work</span>
+            <div className="flex items-center justify-between w-full mb-12">
+              <div className="flex items-center gap-2">
+                <span className="status-dot" />
+                <span className="text-mono-sm text-green/70">Available for work</span>
+              </div>
+              <ThemeToggle />
             </div>
 
             <div className="space-y-4">

@@ -20,6 +20,21 @@
   --green: #22c55e;
 }
 
+.light {
+  --void: #f9f9fb;
+  --obsidian: #f0f0f2;
+  --ink: #e8e8ed;
+  --steel: #dcdce2;
+  --ash: #8e8ea0;
+  --mist: #555568;
+  --parchment: #0f0f15;
+  --blood: #d41235;
+  --flame: #fa2843;
+  --ember: #f05c2e;
+  --gold: #b3883b;
+  --green: #1b9e4a;
+}
+
 @theme inline {
   --color-void: var(--void);
   --color-obsidian: var(--obsidian);
@@ -482,20 +497,20 @@ select {
 
 .input-dark {
   width: 100%;
-  padding: 0.9rem 1rem;
+  padding: 1rem 1.25rem;
   background: var(--ink);
-  border: 1px solid rgba(232, 228, 240, 0.06);
-  border-radius: 3px;
+  border: 1px solid rgba(232, 228, 240, 0.08);
+  border-radius: 2px;
   color: var(--parchment);
   font-family: "DM Mono", monospace;
-  font-size: 0.8rem;
+  font-size: 0.85rem;
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 
 .input-dark:focus {
   outline: none;
   border-color: var(--blood);
-  box-shadow: 0 0 0 3px rgba(196, 18, 48, 0.08);
+  box-shadow: 0 0 0 4px rgba(196, 18, 48, 0.08);
 }
 
 .input-dark::placeholder {

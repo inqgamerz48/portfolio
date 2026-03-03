@@ -134,13 +134,13 @@ export default function ProjectsPage() {
           transition={{ delay: 0.1 }}
           className="lg:sticky top-24 h-fit"
         >
-          <div className="bg-ink border border-parchment/[0.04] p-6 sm:p-8">
-            <h2 className="font-display text-3xl text-parchment uppercase tracking-wider mb-8 flex items-center gap-3">
+          <div className="bg-ink border border-parchment/[0.04] p-8 sm:p-10">
+            <h2 className="font-display text-3xl text-parchment uppercase tracking-wider mb-10 flex items-center gap-3">
               {isEditing ? <><Edit size={24} className="text-blood" /> Edit Project</> : <><Plus size={24} className="text-blood" /> New Project</>}
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-6">
-              <div className="space-y-2">
+            <form onSubmit={handleSubmit} className="space-y-8">
+              <div className="space-y-3">
                 <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">Title</label>
                 <input
                   type="text"
@@ -152,7 +152,7 @@ export default function ProjectsPage() {
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">Description</label>
                 <textarea
                   value={formData.description}
@@ -164,7 +164,7 @@ export default function ProjectsPage() {
                 />
               </div>
 
-              <div className="space-y-2">
+              <div className="space-y-3">
                 <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">Tech Stack</label>
                 <input
                   type="text"
@@ -175,8 +175,8 @@ export default function ProjectsPage() {
                 />
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                <div className="space-y-3">
                   <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">GitHub Repo</label>
                   <input
                     type="text"
@@ -187,7 +187,7 @@ export default function ProjectsPage() {
                   />
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">Live Demo</label>
                   <input
                     type="text"

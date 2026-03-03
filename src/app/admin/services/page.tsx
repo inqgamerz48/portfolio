@@ -191,12 +191,12 @@ export default function ServicesPage() {
         >
           <div className="bg-ink border border-parchment/10 w-full max-w-2xl my-8 relative">
             <div className="p-8 sm:p-12">
-              <h2 className="font-display text-4xl text-parchment uppercase tracking-wider mb-8 flex items-center gap-3">
+              <h2 className="font-display text-4xl text-parchment uppercase tracking-wider mb-10 flex items-center gap-3">
                 {editingId ? <><Edit size={24} className="text-blood" /> Edit Service</> : <><Plus size={24} className="text-blood" /> New Service</>}
               </h2>
 
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
+              <form onSubmit={handleSubmit} className="space-y-8">
+                <div className="space-y-3">
                   <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">Title</label>
                   <input
                     type="text"
@@ -208,7 +208,7 @@ export default function ServicesPage() {
                   />
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">Description</label>
                   <textarea
                     value={formData.description}
@@ -220,8 +220,8 @@ export default function ServicesPage() {
                   />
                 </div>
 
-                <div className="grid grid-cols-2 gap-6">
-                  <div className="space-y-2">
+                <div className="grid grid-cols-2 gap-8">
+                  <div className="space-y-3">
                     <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">Min Price ($)</label>
                     <input
                       type="number"
@@ -231,7 +231,7 @@ export default function ServicesPage() {
                       className="input-dark w-full text-gold"
                     />
                   </div>
-                  <div className="space-y-2">
+                  <div className="space-y-3">
                     <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">Max Price ($)</label>
                     <input
                       type="number"
@@ -243,7 +243,7 @@ export default function ServicesPage() {
                   </div>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-3">
                   <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">
                     Features (One per line)
                   </label>
