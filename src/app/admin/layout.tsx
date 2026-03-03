@@ -14,6 +14,7 @@ import {
   X,
 } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { CustomCursor } from '@/components/CustomCursor'
 
 const navItems = [
   { name: 'Dashboard', href: '/admin', icon: LayoutDashboard },
@@ -62,8 +63,8 @@ export default function AdminLayout({
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-primary"></div>
+      <div className="min-h-screen bg-void flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blood"></div>
       </div>
     )
   }
@@ -73,96 +74,115 @@ export default function AdminLayout({
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-void text-parchment relative overflow-x-hidden">
+      <CustomCursor />
+      <div className="grain-overlay" aria-hidden="true" />
+      <div className="grid-overlay opacity-50" />
+
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
-        className="fixed left-0 top-0 z-50 w-full bg-card/95 backdrop-blur-md border-b border-card-border"
+        className="fixed left-0 top-0 z-50 w-full bg-void/90 backdrop-blur-md border-b border-parchment/[0.04]"
       >
-        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
-          <Link href="/admin" className="group">
-            <span className="font-cinzel text-2xl font-bold text-primary text-glow">
-              INQ Admin
+        <div className="mx-auto flex max-w-7xl items-center justify-between px-6 lg:px-8 h-16">
+          <Link href="/admin" className="group flex items-center gap-3" data-cursor-hover>
+            <span className="font-display text-2xl text-parchment tracking-wider group-hover:text-flame transition-colors">
+              INQ ADMIN
             </span>
+            <span className="status-dot w-1.5 h-1.5" />
           </Link>
 
           <button
             onClick={() => setIsOpen(!isOpen)}
-            className="md:hidden text-text"
+            className="md:hidden text-parchment flex flex-col gap-1.5 p-2"
+            aria-label="Menu"
           >
-            {isOpen ? <X size={24} /> : <Menu size={24} />}
+            <motion.span animate={isOpen ? { rotate: 45, y: 6 } : { rotate: 0, y: 0 }} className="block w-5 h-[1px] bg-parchment origin-center" />
+            <motion.span animate={isOpen ? { opacity: 0 } : { opacity: 1 }} className="block w-5 h-[1px] bg-parchment" />
+            <motion.span animate={isOpen ? { rotate: -45, y: -6 } : { rotate: 0, y: 0 }} className="block w-5 h-[1px] bg-parchment origin-center" />
           </button>
 
-          <div className="hidden md:flex items-center gap-6">
+          {/* Desktop Nav */}
+          <div className="hidden md:flex items-center gap-8">
             {navItems.map((item) => (
               <Link
                 key={item.name}
                 href={item.href}
-                className={`flex items-center gap-2 text-sm font-medium transition-colors ${
-                  pathname === item.href
-                    ? 'text-primary'
-                    : 'text-text-muted hover:text-text'
-                }`}
+                data-cursor-hover
+                className={`flex items-center gap-2 text-mono-sm transition-all duration-300 relative group ${pathname === item.href
+                    ? 'text-parchment'
+                    : 'text-mist hover:text-parchment'
+                  }`}
               >
-                <item.icon size={18} />
+                <item.icon size={14} className={pathname === item.href ? 'text-blood' : 'text-ash group-hover:text-flame transition-colors'} />
                 {item.name}
+                <span className={`absolute -bottom-1 left-0 h-[1px] bg-blood transition-all duration-300 ${pathname === item.href ? 'w-full' : 'w-0 group-hover:w-full'}`} />
               </Link>
             ))}
+
+            <div className="w-[1px] h-4 bg-parchment/[0.06] mx-2" />
+
             <button
               onClick={handleLogout}
-              className="flex items-center gap-2 text-sm font-medium text-text-muted hover:text-red-500 transition-colors"
+              data-cursor-hover
+              className="flex items-center gap-2 text-mono-sm text-mist hover:text-blood transition-colors"
             >
-              <LogOut size={18} />
-              Logout
+              <LogOut size={14} />
+              LOGOUT
             </button>
           </div>
         </div>
       </motion.nav>
 
+      {/* Mobile Menu */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, x: '100%' }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: '100%' }}
-            className="fixed inset-0 z-40 flex flex-col items-center justify-center bg-background/95 backdrop-blur-md md:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-40 bg-void flex flex-col items-start justify-center px-8 md:hidden"
           >
-            <button
-              onClick={() => setIsOpen(false)}
-              className="absolute right-6 top-6 text-text"
-            >
-              <X size={24} />
-            </button>
-
-            <div className="flex flex-col items-center gap-8">
-              {navItems.map((item) => (
-                <Link
+            <div className="space-y-6 w-full max-w-sm mx-auto">
+              {navItems.map((item, i) => (
+                <motion.div
                   key={item.name}
-                  href={item.href}
-                  onClick={() => setIsOpen(false)}
-                  className={`flex items-center gap-2 font-cinzel text-xl ${
-                    pathname === item.href
-                      ? 'text-primary'
-                      : 'text-text'
-                  }`}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: i * 0.05 }}
                 >
-                  <item.icon size={20} />
-                  {item.name}
-                </Link>
+                  <Link
+                    href={item.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`flex items-center gap-4 font-display text-4xl tracking-wider transition-colors ${pathname === item.href ? 'text-flame' : 'text-parchment hover:text-flame'
+                      }`}
+                  >
+                    <item.icon size={24} className={pathname === item.href ? 'text-blood' : 'text-mist'} />
+                    {item.name}
+                  </Link>
+                </motion.div>
               ))}
-              <button
-                onClick={handleLogout}
-                className="flex items-center gap-2 font-cinzel text-xl text-red-500"
+
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: navItems.length * 0.05 }}
+                className="pt-8 mt-8 border-t border-parchment/[0.06]"
               >
-                <LogOut size={20} />
-                Logout
-              </button>
+                <button
+                  onClick={handleLogout}
+                  className="flex items-center gap-4 font-display text-3xl tracking-wider text-mist hover:text-blood transition-colors"
+                >
+                  <LogOut size={20} />
+                  LOGOUT
+                </button>
+              </motion.div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      <main className="pt-24 px-6 pb-12">
+      <main className="relative z-10 pt-24 px-6 lg:px-8 pb-20 min-h-screen">
         <div className="mx-auto max-w-7xl">
           {children}
         </div>

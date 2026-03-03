@@ -2,10 +2,7 @@
 
 import { useState, useEffect, Suspense } from 'react'
 import { motion } from 'framer-motion'
-import { Edit, Trash2, Eye, Upload } from 'lucide-react'
-import { Card } from '@/components/ui/Card'
-import { Button } from '@/components/ui/Button'
-import { Input, Textarea } from '@/components/ui/Input'
+import { Edit, Trash2, Eye, Upload, Plus } from 'lucide-react'
 
 interface BlogPost {
   id: string
@@ -86,6 +83,7 @@ export default function BlogPage() {
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
             title: formData.title,
+            slug: formData.slug,
             excerpt: formData.excerpt,
             category: formData.category,
             published: formData.published,
@@ -129,6 +127,7 @@ export default function BlogPage() {
       pdf: null,
     })
     setIsEditing(true)
+    window.scrollTo({ top: 0, behavior: 'smooth' })
   }
 
   const resetForm = () => {
@@ -156,170 +155,190 @@ export default function BlogPage() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8"
+        className="mb-12"
       >
-        <h1 className="font-cinzel text-3xl font-bold text-text">Blog</h1>
-        <p className="font-inter text-text-muted mt-1">Manage your blog posts with PDF upload</p>
+        <h1 className="font-display text-5xl md:text-6xl text-parchment tracking-wider uppercase">Journal</h1>
+        <p className="font-mono text-mist mt-3 uppercase tracking-widest text-sm">Manage blog & PDF publications</p>
       </motion.div>
 
-      <div className="grid lg:grid-cols-3 gap-8">
+      <div className="grid lg:grid-cols-[1fr_2fr] gap-8 lg:gap-12">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
+          className="lg:sticky top-24 h-fit"
         >
-          <Card>
-            <h2 className="font-cinzel text-xl font-semibold text-text mb-4">
-              {isEditing ? 'Edit Post' : 'Add New Post'}
+          <div className="bg-ink border border-parchment/[0.04] p-6 sm:p-8">
+            <h2 className="font-display text-3xl text-parchment uppercase tracking-wider mb-8 flex items-center gap-3">
+              {isEditing ? <><Edit size={24} className="text-blood" /> Edit Post</> : <><Plus size={24} className="text-blood" /> New Post</>}
             </h2>
 
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <Input
-                label="Title"
-                value={formData.title}
-                onChange={(e) => handleTitleChange(e.target.value)}
-                required
-              />
+            <form onSubmit={handleSubmit} className="space-y-6">
+              <div className="space-y-2">
+                <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">Title</label>
+                <input
+                  type="text"
+                  value={formData.title}
+                  onChange={(e) => handleTitleChange(e.target.value)}
+                  required
+                  className="input-dark w-full"
+                  placeholder="POST TITLE"
+                />
+              </div>
 
-              <Input
-                label="Slug"
-                value={formData.slug}
-                onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
-                required
-              />
+              <div className="space-y-2">
+                <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">Slug URL</label>
+                <input
+                  type="text"
+                  value={formData.slug}
+                  onChange={(e) => setFormData({ ...formData, slug: e.target.value })}
+                  required
+                  className="input-dark w-full text-mist/70 font-mono text-sm"
+                  placeholder="post-url-slug"
+                />
+              </div>
 
-              <Textarea
-                label="Excerpt"
-                value={formData.excerpt}
-                onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
-              />
+              <div className="space-y-2">
+                <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">Excerpt</label>
+                <textarea
+                  value={formData.excerpt}
+                  onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
+                  rows={3}
+                  className="input-dark w-full resize-none"
+                  placeholder="Brief summary..."
+                />
+              </div>
 
-              <div className="w-full">
-                <label className="mb-2 block text-sm font-medium text-text-muted">
-                  Category
-                </label>
+              <div className="space-y-2">
+                <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">Category</label>
                 <select
                   value={formData.category}
                   onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                  className="w-full rounded-lg border border-card-border bg-background px-4 py-3 text-text input-glow"
+                  className="w-full bg-void border border-parchment/10 text-parchment px-4 py-3 font-mono text-sm tracking-widest uppercase focus:border-blood focus:outline-none transition-colors rounded-none appearance-none cursor-pointer hover:border-parchment/30"
                 >
-                  <option value="Development">Development</option>
-                  <option value="AI">AI</option>
-                  <option value="Projects">Projects</option>
-                  <option value="Tips">Tips</option>
+                  <option value="Development" className="bg-ink text-parchment">Development</option>
+                  <option value="AI" className="bg-ink text-parchment">AI</option>
+                  <option value="Projects" className="bg-ink text-parchment">Projects</option>
+                  <option value="Systems" className="bg-ink text-parchment">Systems</option>
+                  <option value="Design" className="bg-ink text-parchment">Design</option>
                 </select>
               </div>
 
-              <div className="w-full">
-                <label className="mb-2 block text-sm font-medium text-text-muted">
-                  PDF File (optional)
-                </label>
-                <div className="relative">
+              <div className="space-y-2">
+                <label className="text-mono-sm text-mist tracking-widest uppercase ml-1">Attach PDF</label>
+                <div className="relative group">
                   <input
                     type="file"
                     accept=".pdf"
                     onChange={handleFileChange}
-                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    className="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10"
                   />
-                  <div className="flex items-center justify-center w-full h-12 border border-card-border rounded-lg bg-card hover:border-primary transition-colors">
-                    <Upload size={18} className="mr-2 text-text-muted" />
-                    <span className="text-sm text-text-muted">
-                      {formData.pdf ? formData.pdf.name : 'Upload PDF'}
+                  <div className="flex items-center justify-center w-full h-14 border border-dashed border-parchment/20 bg-void group-hover:border-blood group-hover:bg-blood/5 transition-all">
+                    <Upload size={18} className="mr-3 text-mist group-hover:text-blood transition-colors" />
+                    <span className="font-mono text-sm text-mist uppercase tracking-widest group-hover:text-parchment transition-colors truncate px-4">
+                      {formData.pdf ? formData.pdf.name : 'CLICK TO UPLOAD PDF'}
                     </span>
                   </div>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  id="published"
-                  checked={formData.published}
-                  onChange={(e) => setFormData({ ...formData, published: e.target.checked })}
-                  className="w-4 h-4 accent-primary"
-                />
-                <label htmlFor="published" className="text-sm text-text-muted">
-                  Published
+              <div className="flex items-center gap-3 pt-2">
+                <label className="flex items-center gap-3 cursor-pointer group">
+                  <div className="relative flex items-center justify-center w-5 h-5 border border-parchment/20 bg-void group-hover:border-blood transition-colors rounded-sm">
+                    <input
+                      type="checkbox"
+                      className="absolute opacity-0 cursor-pointer w-full h-full"
+                      checked={formData.published}
+                      onChange={(e) => setFormData({ ...formData, published: e.target.checked })}
+                    />
+                    {formData.published && (
+                      <motion.div initial={{ scale: 0 }} animate={{ scale: 1 }} className="w-3 h-3 bg-blood rounded-sm" />
+                    )}
+                  </div>
+                  <span className="text-mono-sm text-mist uppercase tracking-widest group-hover:text-parchment transition-colors">Published (Live)</span>
                 </label>
               </div>
 
-              <div className="flex gap-2">
-                <Button type="submit" disabled={uploading} className="flex-1">
-                  {uploading ? 'Saving...' : isEditing ? 'Update' : 'Create'} Post
-                </Button>
+              <div className="flex gap-4 pt-4 border-t border-parchment/[0.04]">
+                <button type="submit" disabled={uploading} data-cursor-hover className="flex-1 btn-blade bg-blood text-parchment disabled:opacity-50">
+                  {uploading ? 'UPLOADING...' : isEditing ? 'UPDATE POST' : 'CREATE POST'}
+                </button>
                 {isEditing && (
-                  <Button type="button" variant="outline" onClick={resetForm}>
-                    Cancel
-                  </Button>
+                  <button type="button" onClick={resetForm} className="px-6 py-3 font-mono text-sm uppercase tracking-widest text-mist hover:text-parchment border border-parchment/20 hover:border-parchment/50 transition-colors">
+                    CANCEL
+                  </button>
                 )}
               </div>
             </form>
-          </Card>
+          </div>
         </motion.div>
 
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="lg:col-span-2"
         >
           {isLoading ? (
-            <div className="text-center py-12 text-text-muted">Loading...</div>
+            <div className="flex items-center justify-center py-24 text-blood">
+              <div className="animate-spin rounded-full h-8 w-8 border-t-2 border-b-2 border-blood"></div>
+            </div>
           ) : posts.length === 0 ? (
-            <div className="text-center py-12 text-text-muted">No posts yet</div>
+            <div className="text-center py-24 border border-dashed border-parchment/20 text-mist font-mono uppercase tracking-widest text-sm">
+              NO POSTS YET. START WRITING.
+            </div>
           ) : (
-            <div className="space-y-4">
+            <div className="flex flex-col border-t border-parchment/[0.04]">
               {posts.map((post) => (
-                <Card key={post.id} className="flex items-center justify-between">
+                <div key={post.id} className="py-6 border-b border-parchment/[0.04] flex flex-col sm:flex-row sm:items-center justify-between gap-4 group hover:bg-ink/50 transition-colors px-4 -mx-4">
                   <div className="flex-1">
-                    <h3 className="font-cinzel text-lg font-semibold text-text">
-                      {post.title}
-                      {post.pdfUrl && (
-                        <span className="ml-2 text-xs px-2 py-0.5 bg-accent/20 text-accent rounded">
-                          PDF
-                        </span>
-                      )}
+                    <div className="flex items-center gap-4 mb-2">
+                      <span className="font-mono text-xs text-mist uppercase tracking-widest">
+                        {new Date(post.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' }).replace(/\//g, '.')}
+                      </span>
+                      <span className="text-[10px] font-mono tracking-widest uppercase px-2 py-0.5 border border-parchment/10 text-ash">
+                        {post.category}
+                      </span>
                       {!post.published && (
-                        <span className="ml-2 text-xs px-2 py-0.5 bg-yellow-500/20 text-yellow-500 rounded">
+                        <span className="text-[10px] font-mono tracking-widest uppercase px-2 py-0.5 bg-yellow-500/10 text-yellow-500 border border-yellow-500/20">
                           Draft
                         </span>
                       )}
-                    </h3>
-                    <div className="flex items-center gap-3 mt-1">
-                      <span className="text-xs px-2 py-0.5 bg-primary/20 text-primary rounded">
-                        {post.category}
-                      </span>
-                      <span className="text-xs text-text-muted">
-                        {new Date(post.createdAt).toLocaleDateString()}
-                      </span>
                     </div>
+
+                    <h3 className="font-display text-2xl text-parchment tracking-wider uppercase group-hover:text-flame transition-colors">
+                      {post.title}
+                    </h3>
                   </div>
 
-                  <div className="flex items-center gap-2 ml-4">
+                  <div className="flex items-center gap-2 shrink-0">
                     {post.pdfUrl && (
                       <a
                         href={post.pdfUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="p-2 text-text-muted hover:text-primary transition-colors"
+                        title="View PDF"
+                        className="p-3 bg-void border border-parchment/5 text-mist hover:text-parchment hover:border-parchment/20 transition-all rounded-sm flex items-center gap-2 group/btn"
                       >
-                        <Eye size={18} />
+                        <Eye size={16} />
+                        <span className="hidden leading-none sm:block font-mono text-[10px] tracking-widest uppercase">PDF</span>
                       </a>
                     )}
                     <button
                       onClick={() => handleEdit(post)}
-                      className="p-2 text-text-muted hover:text-accent transition-colors"
+                      className="p-3 bg-void border border-parchment/5 text-mist hover:text-parchment hover:border-parchment/20 transition-all rounded-sm"
+                      title="Edit"
                     >
-                      <Edit size={18} />
+                      <Edit size={16} />
                     </button>
                     <button
                       onClick={() => handleDelete(post.slug)}
-                      className="p-2 text-text-muted hover:text-red-500 transition-colors"
+                      className="p-3 bg-void border border-blood/10 text-blood hover:bg-blood hover:text-parchment transition-all rounded-sm"
+                      title="Delete"
                     >
-                      <Trash2 size={18} />
+                      <Trash2 size={16} />
                     </button>
                   </div>
-                </Card>
+                </div>
               ))}
             </div>
           )}

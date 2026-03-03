@@ -2,9 +2,8 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { FolderKanban, FileText, MessageSquare, Package, Plus, ArrowRight } from 'lucide-react'
+import { FolderKanban, FileText, MessageSquare, Package, ArrowRight } from 'lucide-react'
 import Link from 'next/link'
-import { Card } from '@/components/ui/Card'
 
 interface Stats {
   projects: number
@@ -56,10 +55,10 @@ export default function AdminDashboard() {
   }
 
   const statCards = [
-    { name: 'Projects', value: stats.projects, icon: FolderKanban, href: '/admin/projects', color: 'text-primary' },
-    { name: 'Blog Posts', value: stats.posts, icon: FileText, href: '/admin/blog', color: 'text-accent' },
-    { name: 'Messages', value: stats.messages, icon: MessageSquare, href: '/admin/messages', color: 'text-green-500' },
-    { name: 'Services', value: stats.services, icon: Package, href: '/admin/services', color: 'text-purple-500' },
+    { name: 'Projects', value: stats.projects, icon: FolderKanban, href: '/admin/projects', color: 'text-parchment' },
+    { name: 'Blog Posts', value: stats.posts, icon: FileText, href: '/admin/blog', color: 'text-parchment' },
+    { name: 'Messages', value: stats.messages, icon: MessageSquare, href: '/admin/messages', color: 'text-blood' },
+    { name: 'Services', value: stats.services, icon: Package, href: '/admin/services', color: 'text-parchment' },
   ]
 
   return (
@@ -67,13 +66,13 @@ export default function AdminDashboard() {
       <motion.div
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
-        className="mb-8"
+        className="mb-12"
       >
-        <h1 className="font-cinzel text-3xl font-bold text-text">Dashboard</h1>
-        <p className="font-inter text-text-muted mt-1">Welcome back, INQ</p>
+        <h1 className="font-display text-5xl md:text-6xl text-parchment tracking-wider uppercase">Dashboard</h1>
+        <p className="font-mono text-mist mt-3 uppercase tracking-widest text-sm">Welcome back, INQ</p>
       </motion.div>
 
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
         {statCards.map((stat, index) => (
           <motion.div
             key={stat.name}
@@ -81,18 +80,18 @@ export default function AdminDashboard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: index * 0.1 }}
           >
-            <Card className="text-center">
-              <stat.icon className={`mx-auto mb-2 ${stat.color}`} size={32} />
-              <div className="font-cinzel text-3xl font-bold text-text">
+            <div className="bg-ink border border-parchment/[0.04] p-6 group hover:border-blood/30 transition-colors flex flex-col items-center justify-center text-center h-full">
+              <stat.icon className={`mb-4 ${stat.color} group-hover:text-flame transition-colors`} size={24} />
+              <div className="font-display text-5xl text-parchment tracking-wider mb-2">
                 {loading ? '...' : stat.value}
               </div>
-              <div className="font-inter text-sm text-text-muted">{stat.name}</div>
-            </Card>
+              <div className="font-mono text-xs text-mist uppercase tracking-widest">{stat.name}</div>
+            </div>
           </motion.div>
         ))}
       </div>
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
         {[
           { title: 'Manage Projects', description: 'Add, edit, or remove projects from your portfolio', href: '/admin/projects', icon: FolderKanban },
           { title: 'Manage Blog', description: 'Create and publish blog posts with PDF support', href: '/admin/blog', icon: FileText },
@@ -104,23 +103,26 @@ export default function AdminDashboard() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.3 + index * 0.1 }}
           >
-            <Link href={item.href}>
-              <Card glow className="h-full cursor-pointer group">
-                <div className="flex items-start justify-between">
-                  <div>
-                    <h3 className="font-cinzel text-xl font-semibold text-text mb-2 group-hover:text-primary transition-colors">
-                      {item.title}
-                    </h3>
-                    <p className="font-inter text-sm text-text-muted">
-                      {item.description}
-                    </p>
+            <Link href={item.href} data-cursor-hover>
+              <div className="bg-ink border border-parchment/[0.04] p-8 h-full group hover:border-blood/50 transition-all duration-500 relative overflow-hidden">
+                <div className="absolute inset-0 bg-gradient-to-br from-blood/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="relative z-10 flex flex-col h-full justify-between">
+                  <div className="flex items-start justify-between mb-8">
+                    <div>
+                      <h3 className="font-display text-2xl tracking-wider text-parchment mb-3 group-hover:text-flame transition-colors uppercase">
+                        {item.title}
+                      </h3>
+                      <p className="text-mist text-sm leading-relaxed">
+                        {item.description}
+                      </p>
+                    </div>
+                    <item.icon className="text-ash group-hover:text-blood transition-colors shrink-0" size={24} />
                   </div>
-                  <item.icon className="text-primary" size={24} />
+                  <div className="flex items-center text-blood text-sm font-mono tracking-widest uppercase mt-4 gap-2 group-hover:gap-4 transition-all">
+                    Manage <ArrowRight size={16} />
+                  </div>
                 </div>
-                <div className="flex items-center text-primary text-sm mt-4 group-hover:gap-3 transition-all">
-                  Manage <ArrowRight size={16} className="ml-1" />
-                </div>
-              </Card>
+              </div>
             </Link>
           </motion.div>
         ))}
