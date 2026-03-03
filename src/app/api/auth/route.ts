@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { cookies } from 'next/headers'
-import { prisma } from '@/lib/prisma'
 import { createToken } from '@/lib/auth'
-import bcrypt from 'bcryptjs'
+
+const DEMO_USERNAME = 'INQ'
+const DEMO_PASSWORD = 'fuckingrich@2026'
 
 export async function POST(request: NextRequest) {
   try {
@@ -15,37 +16,24 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    const admin = await prisma.admin.findUnique({
-      where: { username: username.toUpperCase() },
-    })
+    if (username.toUpperCase() === DEMO_USERNAME && password === DEMO_PASSWORD) {
+      const token = await createToken({ username: DEMO_USERNAME })
 
-    if (!admin) {
-      return NextResponse.json(
-        { error: 'Invalid credentials' },
-        { status: 401 }
-      )
+      const cookieStore = await cookies()
+      cookieStore.set('auth-token', token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === 'production',
+        sameSite: 'lax',
+        maxAge: 60 * 60 * 24 * 7,
+      })
+
+      return NextResponse.json({ success: true, username: DEMO_USERNAME })
     }
 
-    const validPassword = await bcrypt.compare(password, admin.passwordHash)
-
-    if (!validPassword) {
-      return NextResponse.json(
-        { error: 'Invalid credentials' },
-        { status: 401 }
-      )
-    }
-
-    const token = await createToken({ username: admin.username })
-
-    const cookieStore = await cookies()
-    cookieStore.set('auth-token', token, {
-      httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
-      maxAge: 60 * 60 * 24 * 7,
-    })
-
-    return NextResponse.json({ success: true, username: admin.username })
+    return NextResponse.json(
+      { error: 'Invalid credentials' },
+      { status: 401 }
+    )
   } catch (error) {
     console.error('Login error:', error)
     return NextResponse.json(
