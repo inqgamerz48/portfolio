@@ -1,24 +1,23 @@
-@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=IBM+Plex+Mono:wght@300;400;500&display=swap');
-@import url('https://api.fontshare.com/v2/css?f[]=satoshi@400,500,700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&display=swap');
 @import "tailwindcss";
 
 /* ═══════════════════════════════════════
-   THE BLADE'S EDGE — Anime Design Tokens
+   PREMIUM DARK EDITORIAL — Design Tokens
    ═══════════════════════════════════════ */
 
 :root {
   --void: #050507;
   --obsidian: #0a0a0e;
-  --ink: #12121a;
-  --steel: #1e1e2a;
-  --ash: #5a5570;
-  --mist: #9490a8;
+  --ink: #111118;
+  --steel: #1c1c28;
+  --ash: #555568;
+  --mist: #8e8ea0;
   --parchment: #e8e4f0;
   --blood: #c41230;
   --flame: #ff3d52;
   --ember: #ff6b3d;
   --gold: #d4a853;
-  --slash-line: rgba(196, 18, 48, 0.15);
+  --green: #22c55e;
 }
 
 @theme inline {
@@ -33,9 +32,10 @@
   --color-flame: var(--flame);
   --color-ember: var(--ember);
   --color-gold: var(--gold);
-  --font-serif: "Playfair Display", serif;
-  --font-sans: "Satoshi", sans-serif;
-  --font-mono: "IBM Plex Mono", monospace;
+  --color-green: var(--green);
+  --font-display: "Bebas Neue", sans-serif;
+  --font-serif: "Instrument Serif", serif;
+  --font-mono: "DM Mono", monospace;
 }
 
 /* ═══════════════════════════════════════
@@ -46,6 +46,7 @@
   box-sizing: border-box;
   margin: 0;
   padding: 0;
+  cursor: none;
 }
 
 html {
@@ -56,10 +57,12 @@ html {
 body {
   background: var(--void);
   color: var(--parchment);
-  font-family: "Satoshi", sans-serif;
+  font-family: "DM Mono", monospace;
   font-weight: 400;
+  font-size: 0.85rem;
   overflow-x: hidden;
-  line-height: 1.7;
+  line-height: 1.8;
+  cursor: none;
 }
 
 h1,
@@ -68,10 +71,10 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Playfair Display", serif;
-  font-weight: 900;
-  line-height: 1.0;
-  letter-spacing: -0.02em;
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  line-height: 0.95;
+  letter-spacing: 0.02em;
 }
 
 ::selection {
@@ -92,377 +95,71 @@ h6 {
   border-radius: 2px;
 }
 
-/* ═══════════════════════════════════════
-   SECTION LAYOUT
-   ═══════════════════════════════════════ */
-
-.section-wrapper {
-  position: relative;
-  padding: 7rem 1.5rem;
-}
-
-@media (min-width: 768px) {
-  .section-wrapper {
-    padding: 10rem 3rem;
-  }
-}
-
-@media (min-width: 1024px) {
-  .section-wrapper {
-    padding: 12rem 6rem;
-  }
-}
-
-.section-inner {
-  max-width: 68rem;
-  margin: 0 auto;
+a,
+button,
+input,
+textarea,
+select {
+  cursor: none;
 }
 
 /* ═══════════════════════════════════════
-   SLASH DIVIDER — Diagonal katana cut
+   CUSTOM CURSOR
    ═══════════════════════════════════════ */
 
-.slash-divider {
-  position: relative;
-  height: 60px;
-  overflow: hidden;
-}
-
-.slash-divider::before {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: -5%;
-  width: 110%;
-  height: 1px;
-  background: linear-gradient(90deg, transparent 0%, var(--blood) 20%, var(--flame) 50%, var(--blood) 80%, transparent 100%);
-  transform: rotate(-1.5deg);
-  opacity: 0.3;
-}
-
-/* Horizontal rule — subtle */
-.hr-blood {
-  height: 1px;
-  border: none;
-  background: linear-gradient(90deg, transparent, rgba(196, 18, 48, 0.2) 50%, transparent);
-}
-
-/* ═══════════════════════════════════════
-   TYPOGRAPHY
-   ═══════════════════════════════════════ */
-
-.text-display {
-  font-family: "Playfair Display", serif;
-  font-size: clamp(3.5rem, 12vw, 8.5rem);
-  font-weight: 900;
-  line-height: 0.95;
-  letter-spacing: -0.03em;
-}
-
-.text-heading {
-  font-family: "Playfair Display", serif;
-  font-size: clamp(2rem, 5vw, 3.5rem);
-  font-weight: 900;
-  line-height: 1.05;
-}
-
-.text-mono {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-}
-
-.section-eyebrow {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.25em;
-  text-transform: uppercase;
-  color: var(--blood);
-}
-
-/* ═══════════════════════════════════════
-   TEXT GLOW — Crimson
-   ═══════════════════════════════════════ */
-
-.text-blood-glow {
-  color: var(--flame);
-  text-shadow:
-    0 0 20px rgba(196, 18, 48, 0.6),
-    0 0 60px rgba(196, 18, 48, 0.3),
-    0 0 100px rgba(196, 18, 48, 0.15);
-}
-
-.text-gold-glow {
-  color: var(--gold);
-  text-shadow: 0 0 30px rgba(212, 168, 83, 0.3);
-}
-
-/* ═══════════════════════════════════════
-   ANIME CARDS — Dark with crimson glow
-   ═══════════════════════════════════════ */
-
-.anime-card {
-  background: var(--ink);
-  border: 1px solid rgba(196, 18, 48, 0.08);
-  border-radius: 6px;
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  position: relative;
-  overflow: hidden;
-}
-
-.anime-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--blood) 50%, transparent);
-  opacity: 0;
-  transition: opacity 0.4s ease;
-}
-
-.anime-card:hover {
-  border-color: rgba(196, 18, 48, 0.2);
-  box-shadow:
-    0 0 40px rgba(196, 18, 48, 0.06),
-    0 20px 60px rgba(0, 0, 0, 0.4);
-  transform: translateY(-3px);
-}
-
-.anime-card:hover::before {
-  opacity: 1;
-}
-
-/* ═══════════════════════════════════════
-   BUTTONS — Blade style
-   ═══════════════════════════════════════ */
-
-.btn-blade {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  padding: 0.9rem 2.4rem;
-  border: 1px solid var(--blood);
-  border-radius: 2px;
-  background: transparent;
-  color: var(--parchment);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.7rem;
-  font-weight: 500;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-  transition: all 0.4s ease;
-}
-
-.btn-blade::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: var(--blood);
-  transition: left 0.3s ease;
-  z-index: -1;
-}
-
-.btn-blade:hover::before {
-  left: 0;
-}
-
-.btn-blade:hover {
-  color: #fff;
-  box-shadow: 0 0 30px rgba(196, 18, 48, 0.3);
-}
-
-.btn-ghost {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.375rem;
-  padding: 0.5rem 0;
-  background: none;
-  border: none;
-  color: var(--mist);
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 0.65rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  cursor: pointer;
-  border-bottom: 1px solid transparent;
-  transition: all 0.3s ease;
-}
-
-.btn-ghost:hover {
-  color: var(--flame);
-  border-bottom-color: var(--flame);
-}
-
-/* ═══════════════════════════════════════
-   INPUTS — Dark with crimson focus
-   ═══════════════════════════════════════ */
-
-.input-anime {
-  width: 100%;
-  padding: 1rem 1.25rem;
-  background: var(--ink);
-  border: 1px solid rgba(196, 18, 48, 0.08);
-  border-radius: 4px;
-  color: var(--parchment);
-  font-family: "Satoshi", sans-serif;
-  font-size: 0.95rem;
-  transition: all 0.3s ease;
-}
-
-.input-anime:focus {
-  outline: none;
-  border-color: var(--blood);
-  box-shadow: 0 0 0 3px rgba(196, 18, 48, 0.1), 0 0 20px rgba(196, 18, 48, 0.05);
-}
-
-.input-anime::placeholder {
-  color: var(--ash);
-}
-
-textarea.input-anime {
-  resize: vertical;
-  min-height: 120px;
-}
-
-.input-anime option {
-  background: var(--ink);
-  color: var(--parchment);
-}
-
-/* ═══════════════════════════════════════
-   FLOATING PARTICLES — CSS-only embers
-   ═══════════════════════════════════════ */
-
-@keyframes float-particle {
-
-  0%,
-  100% {
-    transform: translateY(0) translateX(0);
-    opacity: 0;
-  }
-
-  10% {
-    opacity: 1;
-  }
-
-  90% {
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateY(-100vh) translateX(20px);
-    opacity: 0;
-  }
-}
-
-.particle {
-  position: absolute;
-  width: 2px;
-  height: 2px;
-  background: var(--blood);
+.cursor-dot {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  background: var(--parchment);
   border-radius: 50%;
   pointer-events: none;
-  box-shadow: 0 0 6px var(--blood), 0 0 12px rgba(196, 18, 48, 0.3);
+  z-index: 99999;
+  transform: translate(-50%, -50%);
+  transition: transform 0.1s ease, background 0.2s ease;
 }
 
-.particle:nth-child(1) {
-  left: 15%;
-  bottom: 0;
-  animation: float-particle 12s 0s infinite;
+.cursor-ring {
+  position: fixed;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(232, 228, 240, 0.3);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 99998;
+  transform: translate(-50%, -50%);
+  transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease, background 0.2s ease;
 }
 
-.particle:nth-child(2) {
-  left: 45%;
-  bottom: 0;
-  animation: float-particle 16s 3s infinite;
+.cursor-hover .cursor-dot {
+  transform: translate(-50%, -50%) scale(2.5);
+  background: var(--blood);
 }
 
-.particle:nth-child(3) {
-  left: 75%;
-  bottom: 0;
-  animation: float-particle 14s 6s infinite;
-}
-
-.particle:nth-child(4) {
-  left: 90%;
-  bottom: 0;
-  animation: float-particle 18s 2s infinite;
+.cursor-hover .cursor-ring {
+  width: 50px;
+  height: 50px;
+  border-color: var(--blood);
+  background: rgba(196, 18, 48, 0.05);
 }
 
 /* ═══════════════════════════════════════
-   ATMOSPHERIC GLOW
+   GRID OVERLAY
    ═══════════════════════════════════════ */
 
-.crimson-glow {
+.grid-overlay {
   position: absolute;
   inset: 0;
-  overflow: hidden;
   pointer-events: none;
-}
-
-.crimson-glow::before {
-  content: '';
-  position: absolute;
-  top: -30%;
-  right: -15%;
-  width: 50%;
-  height: 70%;
-  background: radial-gradient(ellipse, rgba(196, 18, 48, 0.06) 0%, transparent 70%);
-  animation: pulse-glow 8s ease-in-out infinite;
-}
-
-.crimson-glow::after {
-  content: '';
-  position: absolute;
-  bottom: -20%;
-  left: -10%;
-  width: 40%;
-  height: 50%;
-  background: radial-gradient(ellipse, rgba(255, 61, 82, 0.03) 0%, transparent 70%);
-  animation: pulse-glow 12s ease-in-out 3s infinite;
-}
-
-@keyframes pulse-glow {
-
-  0%,
-  100% {
-    opacity: 0.5;
-    transform: scale(1);
-  }
-
-  50% {
-    opacity: 1;
-    transform: scale(1.15);
-  }
+  background-image:
+    linear-gradient(rgba(232, 228, 240, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 228, 240, 0.02) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 80%);
 }
 
 /* ═══════════════════════════════════════
-   KANJI DECORATION
-   ═══════════════════════════════════════ */
-
-.kanji-bg {
-  position: absolute;
-  font-family: serif;
-  font-size: clamp(15rem, 30vw, 25rem);
-  font-weight: 900;
-  color: rgba(196, 18, 48, 0.03);
-  pointer-events: none;
-  user-select: none;
-  line-height: 1;
-}
-
-/* ═══════════════════════════════════════
-   FILM GRAIN
+   NOISE TEXTURE
    ═══════════════════════════════════════ */
 
 @keyframes grain {
@@ -501,9 +198,337 @@ textarea.input-anime {
   height: 200%;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.02;
+  opacity: 0.025;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   animation: grain 8s steps(10) infinite;
+}
+
+/* ═══════════════════════════════════════
+   SECTION LAYOUT
+   ═══════════════════════════════════════ */
+
+.section-wrapper {
+  position: relative;
+  padding: 6rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .section-wrapper {
+    padding: 8rem 3rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .section-wrapper {
+    padding: 10rem 5rem;
+  }
+}
+
+.section-inner {
+  max-width: 72rem;
+  margin: 0 auto;
+}
+
+/* ═══════════════════════════════════════
+   SECTION HEADER WITH NUMBER
+   ═══════════════════════════════════════ */
+
+.section-header {
+  display: flex;
+  align-items: baseline;
+  gap: 1.5rem;
+  margin-bottom: 4rem;
+  border-bottom: 1px solid rgba(232, 228, 240, 0.06);
+  padding-bottom: 1.5rem;
+}
+
+.section-num {
+  font-family: "DM Mono", monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.15em;
+  color: var(--blood);
+  opacity: 0.6;
+}
+
+.section-title {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  color: var(--parchment);
+  letter-spacing: 0.04em;
+}
+
+/* ═══════════════════════════════════════
+   TYPOGRAPHY
+   ═══════════════════════════════════════ */
+
+.text-display {
+  font-family: "Bebas Neue", sans-serif;
+  font-size: clamp(4rem, 14vw, 10rem);
+  font-weight: 400;
+  line-height: 0.9;
+  letter-spacing: 0.02em;
+}
+
+.text-serif-italic {
+  font-family: "Instrument Serif", serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+.text-mono-sm {
+  font-family: "DM Mono", monospace;
+  font-size: 0.7rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ═══════════════════════════════════════
+   MARQUEE — Tech strip
+   ═══════════════════════════════════════ */
+
+@keyframes marquee {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.marquee-track {
+  display: flex;
+  animation: marquee 30s linear infinite;
+  width: max-content;
+}
+
+.marquee-container {
+  overflow: hidden;
+  border-top: 1px solid rgba(232, 228, 240, 0.06);
+  border-bottom: 1px solid rgba(232, 228, 240, 0.06);
+  padding: 1.25rem 0;
+  position: relative;
+}
+
+.marquee-container::before,
+.marquee-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 80px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.marquee-container::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--void) 0%, transparent 100%);
+}
+
+.marquee-container::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--void) 0%, transparent 100%);
+}
+
+/* ═══════════════════════════════════════
+   STATUS DOT — Available for work
+   ═══════════════════════════════════════ */
+
+@keyframes pulse-green {
+
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 rgba(34, 197, 94, 0.4);
+  }
+
+  50% {
+    box-shadow: 0 0 0 6px rgba(34, 197, 94, 0);
+  }
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  background: var(--green);
+  border-radius: 50%;
+  display: inline-block;
+  animation: pulse-green 2s ease-in-out infinite;
+}
+
+/* ═══════════════════════════════════════
+   ATMOSPHERIC GLOW
+   ═══════════════════════════════════════ */
+
+.crimson-glow {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.crimson-glow::before {
+  content: '';
+  position: absolute;
+  top: -30%;
+  right: -15%;
+  width: 50%;
+  height: 70%;
+  background: radial-gradient(ellipse, rgba(196, 18, 48, 0.05) 0%, transparent 70%);
+  animation: pulse-glow 8s ease-in-out infinite;
+}
+
+@keyframes pulse-glow {
+
+  0%,
+  100% {
+    opacity: 0.5;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+}
+
+/* ═══════════════════════════════════════
+   CARDS
+   ═══════════════════════════════════════ */
+
+.card-dark {
+  background: var(--ink);
+  border: 1px solid rgba(232, 228, 240, 0.04);
+  border-radius: 4px;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card-dark:hover {
+  border-color: rgba(232, 228, 240, 0.08);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  transform: translateY(-2px);
+}
+
+/* ═══════════════════════════════════════
+   BUTTONS
+   ═══════════════════════════════════════ */
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2.2rem;
+  border: 1px solid var(--blood);
+  border-radius: 2px;
+  background: transparent;
+  color: var(--parchment);
+  font-family: "DM Mono", monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: none;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s ease;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: var(--blood);
+  transition: left 0.3s ease;
+  z-index: -1;
+}
+
+.btn-primary:hover::before {
+  left: 0;
+}
+
+.btn-primary:hover {
+  color: #fff;
+  box-shadow: 0 0 30px rgba(196, 18, 48, 0.25);
+}
+
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  padding: 0.25rem 0;
+  background: none;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--mist);
+  font-family: "DM Mono", monospace;
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: none;
+  transition: all 0.3s ease;
+}
+
+.btn-ghost:hover {
+  color: var(--flame);
+  border-bottom-color: var(--flame);
+}
+
+/* ═══════════════════════════════════════
+   INPUTS
+   ═══════════════════════════════════════ */
+
+.input-dark {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  background: var(--ink);
+  border: 1px solid rgba(232, 228, 240, 0.06);
+  border-radius: 3px;
+  color: var(--parchment);
+  font-family: "DM Mono", monospace;
+  font-size: 0.8rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.input-dark:focus {
+  outline: none;
+  border-color: var(--blood);
+  box-shadow: 0 0 0 3px rgba(196, 18, 48, 0.08);
+}
+
+.input-dark::placeholder {
+  color: var(--ash);
+}
+
+textarea.input-dark {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* ═══════════════════════════════════════
+   TABLE ROWS — For projects
+   ═══════════════════════════════════════ */
+
+.table-row {
+  display: grid;
+  grid-template-columns: 3rem 1fr auto;
+  gap: 2rem;
+  align-items: baseline;
+  padding: 2rem 0;
+  border-bottom: 1px solid rgba(232, 228, 240, 0.04);
+  transition: background 0.3s ease;
+}
+
+.table-row:hover {
+  background: rgba(232, 228, 240, 0.01);
+}
+
+@media (min-width: 768px) {
+  .table-row {
+    grid-template-columns: 3rem 1fr 1fr auto;
+  }
 }
 
 /* ═══════════════════════════════════════
@@ -521,9 +546,29 @@ textarea.input-anime {
     scroll-behavior: auto !important;
   }
 
-  .grain-overlay,
-  .particle {
+  .grain-overlay {
     animation: none;
-    opacity: 0;
+  }
+
+  .marquee-track {
+    animation: none;
+  }
+}
+
+/* Touch devices — show default cursor */
+@media (pointer: coarse) {
+
+  *,
+  a,
+  button,
+  input,
+  textarea,
+  select {
+    cursor: auto !important;
+  }
+
+  .cursor-dot,
+  .cursor-ring {
+    display: none !important;
   }
 }
