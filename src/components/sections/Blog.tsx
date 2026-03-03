@@ -2,148 +2,128 @@
 
 import { useEffect, useState } from 'react'
 import { motion } from 'framer-motion'
-import Link from 'next/link'
+import { ArrowUpRight } from 'lucide-react'
 
 interface BlogPost {
   id: string
   title: string
   slug: string
-  excerpt: string | null
+  excerpt: string
   category: string
+  pdfUrl?: string
   createdAt: string
 }
 
-const fallbackPosts: BlogPost[] = [
-  {
-    id: '1',
-    title: 'Building Production-Ready APIs with FastAPI',
-    slug: 'building-production-ready-apis',
-    excerpt: 'A comprehensive guide to building APIs that actually work in production, with error handling, validation, and documentation.',
-    category: 'Development',
-    createdAt: '2026-02-15',
-  },
-  {
-    id: '2',
-    title: 'The Future of AI in Web Development',
-    slug: 'ai-in-web-development',
-    excerpt: 'How AI is reshaping the landscape of web development and what it means for developers.',
-    category: 'AI',
-    createdAt: '2026-02-10',
-  },
-  {
-    id: '3',
-    title: 'From Solo Developer to Production Deployments',
-    slug: 'solo-developer-deployments',
-    excerpt: 'Lessons learned from shipping 150+ production deployments without a team.',
-    category: 'Projects',
-    createdAt: '2026-02-05',
-  },
-]
-
 export function Blog() {
   const [posts, setPosts] = useState<BlogPost[]>([])
-  const [isLoading, setIsLoading] = useState(true)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     fetch('/api/blog')
       .then((res) => res.json())
       .then((data) => {
-        if (Array.isArray(data) && data.length > 0) {
-          setPosts(data)
-        } else {
-          setPosts(fallbackPosts)
-        }
+        setPosts(Array.isArray(data) ? data : [])
+        setLoading(false)
       })
-      .catch(() => {
-        setPosts(fallbackPosts)
-      })
-      .finally(() => setIsLoading(false))
+      .catch(() => setLoading(false))
   }, [])
 
+  const formatDate = (dateStr: string) => {
+    return new Date(dateStr).toLocaleDateString('en-US', {
+      month: 'short',
+      year: 'numeric',
+    })
+  }
+
   return (
-    <section id="blog" className="relative py-32 md:py-48 px-6 md:px-12 lg:px-24 bg-[#050505]">
-      <div className="max-w-5xl mx-auto">
-        {/* Section header */}
-        <motion.div
+    <section id="blog" className="section-wrapper relative">
+      <div className="section-inner max-w-4xl mx-auto">
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.7 }}
+          viewport={{ once: true }}
+          className="section-eyebrow mb-6"
+        >
+          Writing
+        </motion.p>
+
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-heading text-fg mb-16"
         >
-          <span className="text-mono text-primary/80 tracking-[0.5em] text-xs">
-            Blog
-          </span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl text-foreground mt-6">
-            Thoughts on <span className="text-primary">building</span>.
-          </h2>
-        </motion.div>
+          Thoughts & insights.
+        </motion.h2>
 
         {/* Loading state */}
-        {isLoading && (
-          <div className="grid md:grid-cols-3 gap-6">
+        {loading && (
+          <div className="space-y-0">
             {[1, 2, 3].map((i) => (
-              <div key={i} className="p-6 bg-card border border-card-border animate-pulse">
-                <div className="h-4 bg-card-border rounded w-1/3 mb-4" />
-                <div className="h-6 bg-card-border rounded w-3/4 mb-2" />
-                <div className="h-4 bg-card-border rounded w-full" />
+              <div key={i} className="py-8 border-t border-[rgba(200,180,160,0.08)]">
+                <div className="h-3 w-20 bg-smoke rounded animate-pulse mb-3" />
+                <div className="h-6 w-3/4 bg-smoke rounded animate-pulse mb-2" />
+                <div className="h-3 w-16 bg-smoke rounded animate-pulse" />
               </div>
             ))}
           </div>
         )}
 
-        {/* Posts grid */}
-        {!isLoading && (
-          <div className="grid md:grid-cols-3 gap-6">
-            {posts.slice(0, 6).map((post, index) => (
-              <motion.article
+        {/* Empty state */}
+        {!loading && posts.length === 0 && (
+          <p className="text-ash">No posts yet. Check back soon.</p>
+        )}
+
+        {/* Post list — editorial */}
+        {!loading && posts.length > 0 && (
+          <div className="space-y-0">
+            {posts.map((post, i) => (
+              <motion.div
                 key={post.id}
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: 15 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
+                transition={{ duration: 0.4, delay: i * 0.06 }}
               >
-                <Link href={`/blog/${post.slug}`} className="group block h-full">
-                  <article className="h-full p-6 bg-card border border-card-border hover:border-primary/30 transition-colors duration-300">
-                    {/* Category & date */}
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="text-mono text-primary/60 text-[10px] tracking-[0.15em]">
-                        {post.category.toUpperCase()}
-                      </span>
-                      <span className="text-mono text-text-muted/30 text-[10px]">
-                        {post.createdAt}
-                      </span>
-                    </div>
+                <a
+                  href={`/blog/${post.slug}`}
+                  className="group py-8 border-t border-[rgba(200,180,160,0.08)] grid grid-cols-12 gap-4 items-baseline block"
+                >
+                  {/* Date */}
+                  <span className="col-span-3 lg:col-span-2 text-mono text-charcoal">
+                    {formatDate(post.createdAt)}
+                  </span>
 
-                    {/* Title */}
-                    <h3 className="text-xl text-foreground group-hover:text-primary transition-colors duration-300 mb-3">
-                      {post.title}
-                    </h3>
+                  {/* Title */}
+                  <h3 className="col-span-7 lg:col-span-8 font-serif text-xl lg:text-2xl text-fg group-hover:text-ember-glow transition-colors duration-300">
+                    {post.title}
+                  </h3>
 
-                    {/* Excerpt */}
-                    <p className="text-text-muted/60 text-sm leading-relaxed">
-                      {post.excerpt}
-                    </p>
-                  </article>
-                </Link>
-              </motion.article>
+                  {/* Category */}
+                  <span className="col-span-2 text-right text-mono text-ash opacity-50">
+                    {post.category}
+                  </span>
+                </a>
+              </motion.div>
             ))}
+            <div className="border-t border-[rgba(200,180,160,0.08)]" />
           </div>
         )}
 
-        {/* More posts */}
-        <motion.p
+        {/* View all */}
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-          className="text-center text-text-muted/40 mt-12 text-sm"
+          transition={{ duration: 0.6, delay: 0.2 }}
+          className="mt-12"
         >
-          More articles coming soon
-        </motion.p>
+          <a href="/blog" className="btn-ghost">
+            All posts <ArrowUpRight size={12} />
+          </a>
+        </motion.div>
       </div>
-
-      <div className="section-divider mt-20 max-w-xl mx-auto" />
     </section>
   )
 }

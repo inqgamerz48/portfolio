@@ -2,111 +2,79 @@
 
 import { motion } from 'framer-motion'
 
-const skillCategories = [
+const categories = [
   {
-    title: 'Frontend',
-    skills: ['Next.js 14', 'React', 'TypeScript', 'Tailwind', 'Framer Motion'],
-    description: 'Building interfaces that feel alive',
-    gradient: 'from-blue-500/20 to-cyan-500/20',
+    name: 'Frontend',
+    skills: 'Next.js, React, TypeScript, Tailwind CSS, Framer Motion, HTML/CSS',
   },
   {
-    title: 'Backend',
-    skills: ['FastAPI', 'Node.js', 'Python', 'REST APIs', 'GraphQL'],
-    description: 'Systems that scale with demand',
-    gradient: 'from-green-500/20 to-emerald-500/20',
+    name: 'Backend',
+    skills: 'FastAPI, Node.js, Express, Python, REST APIs, GraphQL',
   },
   {
-    title: 'Database',
-    skills: ['PostgreSQL', 'Prisma', 'SQLAlchemy', 'Firebase', 'Redis'],
-    description: 'Data architecture that performs',
-    gradient: 'from-purple-500/20 to-violet-500/20',
+    name: 'Database & Infra',
+    skills: 'PostgreSQL, MongoDB, Redis, Docker, Nginx, Linux',
   },
   {
-    title: 'DevOps',
-    skills: ['Docker', 'Git', 'Vercel', 'Railway', 'AWS'],
-    description: 'From code to production, seamlessly',
-    gradient: 'from-orange-500/20 to-amber-500/20',
-  },
-  {
-    title: 'AI/ML',
-    skills: ['CrewAI', 'LangChain', 'OpenAI', 'Automation', 'Vector DBs'],
-    description: 'Intelligence that augments capability',
-    gradient: 'from-red-500/20 to-pink-500/20',
+    name: 'AI & Tools',
+    skills: 'LangChain, OpenAI, Prisma, Firebase, Git, Vercel',
   },
 ]
 
 export function Skills() {
   return (
-    <section id="skills" className="section-wrapper relative bg-[#06060a]">
-      <div className="section-divider-top" />
-      <div className="section-inner max-w-5xl mx-auto">
-        {/* Section header */}
-        <motion.div
+    <section id="skills" className="section-wrapper relative">
+      <div className="section-inner max-w-4xl mx-auto">
+        {/* Eyebrow */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.7 }}
+          viewport={{ once: true }}
+          className="section-eyebrow mb-6"
+        >
+          Capabilities
+        </motion.p>
+
+        <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="text-center mb-16"
+          className="text-heading text-fg mb-16"
         >
-          <span className="section-label mb-6 inline-flex">Capabilities</span>
-          <h2 className="text-3xl md:text-4xl lg:text-5xl text-foreground mt-6 max-w-xl mx-auto leading-tight">
-            A full-stack arsenal built through <span className="text-primary-light">years</span> of shipping.
-          </h2>
-        </motion.div>
+          Tools of the trade.
+        </motion.h2>
 
-        {/* Skills grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-5">
-          {skillCategories.map((category, catIndex) => (
+        {/* Editorial numbered list */}
+        <div className="space-y-0">
+          {categories.map((cat, i) => (
             <motion.div
-              key={category.title}
-              initial={{ opacity: 0, y: 30 }}
+              key={cat.name}
+              initial={{ opacity: 0, y: 15 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: catIndex * 0.1 }}
-              className="group glass-card p-7 relative overflow-hidden"
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="py-8 border-t border-[rgba(200,180,160,0.08)] grid grid-cols-12 gap-4 items-baseline"
             >
-              {/* Subtle gradient glow on hover */}
-              <div className={`absolute inset-0 bg-gradient-to-br ${category.gradient} opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl`} />
+              {/* Number */}
+              <span className="col-span-1 text-mono text-charcoal">
+                {String(i + 1).padStart(2, '0')}
+              </span>
 
-              <div className="relative z-10">
-                {/* Category number */}
-                <span className="text-mono text-primary/30 text-xs tracking-[0.3em]">
-                  {String(catIndex + 1).padStart(2, '0')}
-                </span>
+              {/* Category name */}
+              <h3 className="col-span-3 sm:col-span-3 font-serif text-xl lg:text-2xl text-fg">
+                {cat.name}
+              </h3>
 
-                {/* Category title */}
-                <h3 className="font-display text-2xl text-foreground mt-3 mb-2 group-hover:text-primary-light transition-colors duration-300">
-                  {category.title}
-                </h3>
-
-                {/* Description */}
-                <p className="text-text-muted/60 text-sm mb-5">
-                  {category.description}
-                </p>
-
-                {/* Skills */}
-                <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
-                    <span key={skill} className="skill-pill text-[11px]">
-                      {skill}
-                    </span>
-                  ))}
-                </div>
-              </div>
+              {/* Skills — inline */}
+              <p className="col-span-8 text-ash leading-relaxed">
+                {cat.skills}
+              </p>
             </motion.div>
           ))}
+          {/* Bottom border */}
+          <div className="border-t border-[rgba(200,180,160,0.08)]" />
         </div>
-
-        {/* Bottom note */}
-        <motion.p
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.4 }}
-          className="text-center text-text-muted/40 mt-14 text-sm"
-        >
-          <span className="text-primary/40">//</span> Always learning. Never stopping.
-        </motion.p>
       </div>
     </section>
   )

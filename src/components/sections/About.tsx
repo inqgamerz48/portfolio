@@ -2,118 +2,69 @@
 
 import { motion } from 'framer-motion'
 
-const stats = [
-  { value: '4+', label: 'Years Building' },
-  { value: '150+', label: 'Deployments' },
-  { value: '10+', label: 'Products Shipped' },
-  { value: '∞', label: 'Diet Coke' },
-]
-
-const skills = ['Next.js', 'FastAPI', 'PostgreSQL', 'AI/ML', 'Docker', 'TypeScript', 'React', 'Python']
-
-const bio = `I'm a CSE diploma student who stopped waiting for opportunities and started building them. For over 4 years, I've been shipping real products solo — not demos, not tutorials, but production systems that actually run.
-
-I don't just write code. I architect systems. From multi-tenant SaaS platforms to AI-integrated dashboards, I build things that work in the real world.
-
-Fast. Relentless. Production-ready.`
-
 export function About() {
   return (
-    <section id="about" className="section-wrapper relative bg-[#06060a]">
-      <div className="section-divider-top" />
-      <div className="section-inner">
-        {/* Section label */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
+    <section id="about" className="section-wrapper relative">
+      <div className="section-inner max-w-4xl mx-auto">
+        {/* Eyebrow */}
+        <motion.p
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 0.7 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="flex justify-center mb-6"
+          className="section-eyebrow mb-6"
         >
-          <span className="section-label">About</span>
-        </motion.div>
+          About
+        </motion.p>
 
-        {/* Heading */}
+        {/* Editorial lead paragraph */}
         <motion.h2
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
-          className="text-3xl md:text-4xl lg:text-5xl text-foreground text-center mb-16 leading-tight max-w-2xl mx-auto"
+          transition={{ duration: 0.6 }}
+          className="text-heading text-fg mb-10"
         >
-          I build systems that <span className="text-primary-light">work</span>.
-          <br />
-          Not just code that <span className="text-accent-light">looks</span> cool.
+          I&apos;m a solo developer who builds{' '}
+          <em className="text-ember not-italic">production-grade systems</em> —
+          not prototypes, not mockups, not &quot;proof of concepts.&quot;
         </motion.h2>
 
-        {/* Content */}
-        <div className="max-w-2xl mx-auto">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            className="space-y-6 text-text-muted text-lg leading-relaxed"
-          >
-            {bio.split('\n\n').map((paragraph, i) => (
-              <p key={i}>{paragraph}</p>
-            ))}
-          </motion.div>
-
-          {/* Skills tags */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="mt-10 flex flex-wrap justify-center gap-2"
-          >
-            {skills.map((skill) => (
-              <span key={skill} className="skill-pill">
-                <span className="w-1 h-1 rounded-full bg-primary/60" />
-                {skill}
-              </span>
-            ))}
-          </motion.div>
-        </div>
-
-        {/* Stats */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-          className="mt-20"
+          transition={{ duration: 0.6, delay: 0.15 }}
+          className="space-y-6 text-ash leading-relaxed text-lg max-w-3xl"
         >
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-3xl mx-auto">
-            {stats.map((stat) => (
-              <div key={stat.label} className="stat-card">
-                <div className="text-4xl md:text-5xl text-foreground font-light font-display">
-                  {stat.value}
-                </div>
-                <div className="text-mono text-text-muted/50 text-xs tracking-wider mt-3">
-                  {stat.label}
-                </div>
-              </div>
-            ))}
-          </div>
+          <p>
+            CSE Diploma student at Gitam University with 4+ years of building real software.
+            I&apos;ve deployed 150+ production systems across SaaS platforms, university management portals,
+            restaurant ordering systems, and AI-integrated tools.
+          </p>
+          <p>
+            Stack of choice: Next.js, TypeScript, FastAPI, PostgreSQL, Docker.
+            I write code that scales, ships, and survives contact with real users.
+          </p>
         </motion.div>
 
-        {/* Quote */}
-        <motion.blockquote
+        {/* Inline stats — not cards */}
+        <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-20 text-center glass-card-sm p-8 md:p-10 max-w-xl mx-auto"
+          transition={{ duration: 0.6, delay: 0.3 }}
+          className="mt-14 pt-8 border-t border-[rgba(200,180,160,0.08)]"
         >
-          <p className="text-xl md:text-2xl text-foreground/80 italic font-display">
-            &ldquo;The best code is the code you don&rsquo;t have to write.&rdquo;
-          </p>
-          <cite className="text-mono text-text-muted/40 text-xs mt-4 block not-italic tracking-wider">
-            — My philosophy
-          </cite>
-        </motion.blockquote>
+          <div className="flex flex-wrap gap-x-12 gap-y-4 text-mono text-bone">
+            <span>4+ years experience</span>
+            <span className="text-[rgba(200,180,160,0.2)]">·</span>
+            <span>150+ deployments</span>
+            <span className="text-[rgba(200,180,160,0.2)]">·</span>
+            <span>10+ production products</span>
+            <span className="text-[rgba(200,180,160,0.2)]">·</span>
+            <span>Solo developer</span>
+          </div>
+        </motion.div>
       </div>
     </section>
   )
