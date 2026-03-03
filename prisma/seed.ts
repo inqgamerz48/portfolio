@@ -29,37 +29,37 @@ async function main() {
   const services = [
     {
       title: 'Landing Page',
-      description: 'Single page, responsive, animations, contact form, fast delivery',
+      description: 'Single-page presence that converts',
       priceMin: 99,
       priceMax: 149,
-      features: ['Responsive Design', 'Custom Animations', 'Contact Form', 'SEO Optimized', '3-5 Days Delivery'],
+      features: ['Responsive design', 'Custom animations', 'Contact form', 'Basic SEO', '3-5 day delivery'],
       popular: false,
       order: 1,
     },
     {
-      title: 'Business Site + CMS',
-      description: 'Multi-page site, admin panel, blog, content management, SEO optimized',
+      title: 'Business Site',
+      description: 'Multi-page website with CMS',
       priceMin: 199,
       priceMax: 299,
-      features: ['Multi-page Website', 'Admin Panel', 'Blog Integration', 'Content Management', 'SEO Optimization', '7-10 Days Delivery'],
+      features: ['Up to 5 pages', 'Admin panel', 'Blog integration', 'Content management', 'Advanced SEO', '7-10 day delivery'],
       popular: true,
       order: 2,
     },
     {
-      title: 'Full Stack Web App',
-      description: 'Custom web application, database, auth, API, admin dashboard',
+      title: 'Web Application',
+      description: 'Custom full-stack application',
       priceMin: 400,
       priceMax: 800,
-      features: ['Custom Web Application', 'Database Design', 'User Authentication', 'REST API Development', 'Admin Dashboard', '2-4 Weeks Delivery'],
+      features: ['Database design', 'User authentication', 'REST API', 'Admin dashboard', 'Email notifications', '2-4 week delivery'],
       popular: false,
       order: 3,
     },
     {
       title: 'SaaS MVP',
-      description: 'Multi-tenant SaaS, payment integration, full backend, production deployment',
+      description: 'Multi-tenant product ready to scale',
       priceMin: 800,
       priceMax: 1500,
-      features: ['Multi-tenant Architecture', 'Payment Integration', 'Full Backend', 'Production Deployment', 'Scalable Infrastructure', '4-8 Weeks Delivery'],
+      features: ['Multi-tenant architecture', 'Payment integration', 'Full backend', 'Production deployment', 'Scalable design', '4-8 week delivery'],
       popular: false,
       order: 4,
     },
@@ -80,7 +80,7 @@ async function main() {
   const projects = [
     {
       title: 'BizTrackr PRO',
-      description: 'Multi-tenant SaaS commerce platform unifying Inventory, POS, CRM, and Financial Ledgers with enterprise security',
+      description: 'Multi-tenant SaaS commerce platform unifying Inventory, POS, CRM, and Financial Ledgers with enterprise security and real-time analytics',
       stack: ['Next.js 14', 'TypeScript', 'FastAPI', 'PostgreSQL', 'Docker', 'SQLAlchemy'],
       githubUrl: 'https://github.com/inqgamerz48/biztrackr-grand-enterprise',
       liveUrl: null,
@@ -89,30 +89,66 @@ async function main() {
     },
     {
       title: 'UNI Manager',
-      description: 'Enterprise university management system with multi-role portals, RBAC, attendance, grades, and PDF analytics',
-      stack: ['Next.js 14', 'TypeScript', 'PostgreSQL', 'Prisma', 'Firebase Auth'],
+      description: 'Enterprise university management system with multi-role portals, RBAC, attendance tracking, grade management, and PDF analytics generation',
+      stack: ['Next.js 14', 'TypeScript', 'PostgreSQL', 'Prisma', 'Firebase'],
       githubUrl: 'https://github.com/inqgamerz48/final-unimamanger',
       liveUrl: null,
       featured: true,
       order: 2,
     },
     {
-      title: 'CyberSentinel',
-      description: 'Real-time monitoring and analytics dashboard integrating third-party APIs and AI tools',
-      stack: ['React', 'Python', 'FastAPI', 'AI APIs'],
-      githubUrl: null,
-      liveUrl: null,
-      featured: false,
-      order: 3,
-    },
-    {
       title: 'INQ Portfolio V1',
-      description: 'Cinematic portfolio with gamification, anime themes, easter eggs, and service store',
+      description: 'Original cinematic portfolio with gamification, anime themes, easter eggs, and integrated service store',
       stack: ['HTML', 'CSS', 'Vanilla JS', 'FastAPI', 'SQLite'],
       githubUrl: null,
       liveUrl: 'https://portfolio-inq.pages.dev',
+      featured: true,
+      order: 3,
+    },
+    {
+      title: 'TaskFlow',
+      description: 'Minimalist project management tool with real-time collaboration, Kanban boards, and team analytics',
+      stack: ['Next.js', 'React', 'Firebase', 'Tailwind'],
+      githubUrl: 'https://github.com/inqgamerz48/taskflow',
+      liveUrl: null,
       featured: false,
       order: 4,
+    },
+    {
+      title: 'DevConnect',
+      description: 'Developer networking platform with matching algorithm, portfolio showcase, and chat functionality',
+      stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Socket.io'],
+      githubUrl: 'https://github.com/inqgamerz48/devconnect',
+      liveUrl: null,
+      featured: false,
+      order: 5,
+    },
+    {
+      title: 'CodeSnippets',
+      description: 'Personal code library with syntax highlighting, tags, and cloud sync across devices',
+      stack: ['React', 'Node.js', 'MongoDB', 'Monaco Editor'],
+      githubUrl: 'https://github.com/inqgamerz48/codesnippets',
+      liveUrl: null,
+      featured: false,
+      order: 6,
+    },
+    {
+      title: 'WeatherPulse',
+      description: 'Beautiful weather dashboard with forecasts, historical data visualization, and location-based alerts',
+      stack: ['React', 'Weather APIs', 'D3.js', 'Tailwind'],
+      githubUrl: 'https://github.com/inqgamerz48/weatherpulse',
+      liveUrl: null,
+      featured: false,
+      order: 7,
+    },
+    {
+      title: 'URLShortner',
+      description: 'Fast URL shortening service with custom aliases, analytics dashboard, and QR code generation',
+      stack: ['Node.js', 'Express', 'Redis', 'PostgreSQL'],
+      githubUrl: 'https://github.com/inqgamerz48/urlshortner',
+      liveUrl: null,
+      featured: false,
+      order: 8,
     },
   ]
 
@@ -124,6 +160,42 @@ async function main() {
     if (!existing) {
       await prisma.project.create({ data: project })
       console.log(`Project "${project.title}" created`)
+    }
+  }
+
+  // Create sample blog posts
+  const posts = [
+    {
+      title: 'Building Production-Ready APIs with FastAPI',
+      slug: 'building-production-ready-apis',
+      excerpt: 'A comprehensive guide to building APIs that actually work in production, with error handling, validation, and documentation.',
+      category: 'Development',
+      published: true,
+    },
+    {
+      title: 'The Future of AI in Web Development',
+      slug: 'ai-in-web-development',
+      excerpt: 'How AI is reshaping the landscape of web development and what it means for developers.',
+      category: 'AI',
+      published: true,
+    },
+    {
+      title: 'From Solo Developer to Production Deployments',
+      slug: 'solo-developer-deployments',
+      excerpt: 'Lessons learned from shipping 150+ production deployments without a team.',
+      category: 'Projects',
+      published: true,
+    },
+  ]
+
+  for (const post of posts) {
+    const existing = await prisma.blogPost.findUnique({
+      where: { slug: post.slug },
+    })
+
+    if (!existing) {
+      await prisma.blogPost.create({ data: post })
+      console.log(`Blog post "${post.title}" created`)
     }
   }
 
