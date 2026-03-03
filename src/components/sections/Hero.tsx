@@ -17,7 +17,7 @@ export function Hero() {
   const [displayText, setDisplayText] = useState('')
   const [isDeleting, setIsDeleting] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
-  
+
   const { scrollY } = useScroll()
   const y = useTransform(scrollY, [0, 500], [0, 150])
   const opacity = useTransform(scrollY, [0, 300], [1, 0])
@@ -45,98 +45,102 @@ export function Hero() {
   }, [displayText, isDeleting, currentTitle])
 
   return (
-    <section 
+    <section
+      id="home"
       ref={containerRef}
       className="relative min-h-screen flex flex-col justify-center overflow-hidden"
     >
-      {/* Clean dark background */}
-      <div className="absolute inset-0 bg-[#030003]" />
-      
-      {/* Subtle gradient orbs - positioned and sized better */}
-      <motion.div 
-        className="absolute top-1/3 left-1/4 w-[400px] h-[400px] rounded-full"
+      {/* Background */}
+      <div className="absolute inset-0 bg-[#06060a]" />
+
+      {/* Mesh gradient */}
+      <div className="mesh-gradient" />
+
+      {/* Animated gradient orbs */}
+      <motion.div
+        className="absolute top-1/4 left-1/5 w-[500px] h-[500px] rounded-full"
         style={{
-          background: 'radial-gradient(circle, rgba(185, 28, 28, 0.12) 0%, transparent 70%)',
-          filter: 'blur(60px)',
+          background: 'radial-gradient(circle, rgba(193, 18, 31, 0.12) 0%, transparent 70%)',
+          filter: 'blur(80px)',
         }}
         animate={{
-          scale: [1, 1.15, 1],
-          opacity: [0.6, 0.8, 0.6],
+          scale: [1, 1.2, 1],
+          opacity: [0.4, 0.7, 0.4],
         }}
-        transition={{ duration: 8, repeat: Infinity }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut' }}
       />
-      
-      <motion.div 
-        className="absolute bottom-1/3 right-1/4 w-[350px] h-[350px] rounded-full"
+      <motion.div
+        className="absolute bottom-1/4 right-1/5 w-[450px] h-[450px] rounded-full"
         style={{
           background: 'radial-gradient(circle, rgba(234, 88, 12, 0.08) 0%, transparent 70%)',
-          filter: 'blur(60px)',
+          filter: 'blur(80px)',
         }}
         animate={{
           scale: [1.1, 1, 1.1],
-          opacity: [0.5, 0.7, 0.5],
+          opacity: [0.3, 0.6, 0.3],
         }}
-        transition={{ duration: 10, repeat: Infinity }}
+        transition={{ duration: 10, repeat: Infinity, ease: 'easeInOut' }}
       />
 
       {/* Content */}
-      <motion.div 
+      <motion.div
         style={{ y, opacity }}
         className="relative z-10 px-6 md:px-12 lg:px-24 max-w-6xl mx-auto w-full"
       >
-        {/* Eyebrow - centered, clean */}
+        {/* Eyebrow chip */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="text-center mb-8"
+          className="flex justify-center mb-10"
         >
-          <span className="inline-block text-mono text-primary/80 tracking-[0.5em] text-xs">
+          <span className="section-label">
+            <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
             Full Stack Developer — India
           </span>
         </motion.div>
 
-        {/* Main title - centered, balanced */}
+        {/* Main title */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 1, delay: 0.4 }}
-          className="text-center mb-6"
+          className="text-center mb-8"
         >
           <h1 className="text-display text-6xl md:text-8xl lg:text-9xl text-foreground">
             INQ
           </h1>
-          <h1 className="text-display text-4xl md:text-6xl lg:text-7xl text-primary/90">
+          <h1 className="text-display text-4xl md:text-6xl lg:text-7xl text-glow-red text-primary-light mt-2">
             SRIRAM
           </h1>
         </motion.div>
 
-        {/* Subtitle with typewriter - centered */}
+        {/* Subtitle with typewriter */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center mb-12"
+          className="text-center mb-14"
         >
-          <span className="text-xl md:text-2xl text-foreground/90">
+          <span className="text-xl md:text-2xl text-foreground/90 font-body">
             {displayText}
-            <motion.span 
+            <motion.span
               animate={{ opacity: [1, 0] }}
               transition={{ duration: 0.5, repeat: Infinity }}
-              className="inline-block w-[3px] h-[0.9em] bg-primary ml-1 align-middle"
+              className="inline-block w-[3px] h-[0.9em] bg-primary ml-1 align-middle rounded-full"
             />
           </span>
-          <motion.p 
+          <motion.p
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 1.2 }}
-            className="text-mono text-text-muted mt-3 text-sm"
+            className="text-mono text-text-muted/60 mt-4 text-sm"
           >
             {titles[currentTitle].sub}
           </motion.p>
         </motion.div>
 
-        {/* CTA Buttons - centered, clean */}
+        {/* CTA Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -155,12 +159,12 @@ export function Hero() {
           </Link>
         </motion.div>
 
-        {/* Social links - centered */}
+        {/* Social links */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 1.6 }}
-          className="flex items-center justify-center gap-8"
+          className="flex items-center justify-center gap-3"
         >
           {[
             { icon: Github, href: 'https://github.com/inqgamerz48', label: 'GitHub' },
@@ -172,28 +176,28 @@ export function Hero() {
               href={social.href}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-text-muted hover:text-primary transition-colors duration-300 p-2"
+              className="p-3 rounded-xl bg-white/[0.03] border border-white/[0.06] text-text-muted hover:text-primary-light hover:border-primary/30 hover:bg-primary/[0.05] transition-all duration-300"
               aria-label={social.label}
             >
-              <social.icon size={20} strokeWidth={1.5} />
+              <social.icon size={18} strokeWidth={1.5} />
             </a>
           ))}
         </motion.div>
       </motion.div>
 
-      {/* Scroll indicator - centered */}
+      {/* Scroll indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1, y: [0, 8, 0] }}
-        transition={{ 
+        transition={{
           opacity: { delay: 2, duration: 1 },
-          y: { repeat: Infinity, duration: 2 }
+          y: { repeat: Infinity, duration: 2 },
         }}
         className="absolute bottom-8 left-1/2 -translate-x-1/2"
       >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-mono text-text-muted/50 text-[10px] tracking-[0.3em]">SCROLL</span>
-          <ArrowDown size={14} className="text-primary/50" strokeWidth={1} />
+        <div className="flex flex-col items-center gap-3">
+          <span className="text-mono text-text-muted/40 text-[10px] tracking-[0.3em]">SCROLL</span>
+          <div className="w-[1px] h-8 bg-gradient-to-b from-primary/50 to-transparent" />
         </div>
       </motion.div>
     </section>

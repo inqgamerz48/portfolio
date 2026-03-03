@@ -23,6 +23,13 @@ const budgetRanges = [
   { value: '5000+', label: '$5,000+' },
 ]
 
+const contactLinks = [
+  { icon: MessageCircle, label: 'WhatsApp', href: 'https://wa.me/919949357594' },
+  { icon: Mail, label: 'Email', href: 'mailto:nandurisrivatsa91@gmail.com' },
+  { icon: Github, label: 'GitHub', href: 'https://github.com/inqgamerz48' },
+  { icon: Linkedin, label: 'LinkedIn', href: 'https://www.linkedin.com/in/sriram-satya-srivatsa-nanduri-56229a35a' },
+]
+
 export function Contact() {
   const [formData, setFormData] = useState({
     name: '',
@@ -59,9 +66,10 @@ export function Contact() {
   }
 
   return (
-    <section id="contact" className="relative py-32 md:py-48 px-6 md:px-12 lg:px-24 bg-[#030003]">
-      <div className="max-w-3xl mx-auto">
-        {/* Section header - centered */}
+    <section id="contact" className="section-wrapper relative bg-[#06060a]">
+      <div className="section-divider-top" />
+      <div className="section-inner max-w-3xl mx-auto">
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -69,146 +77,130 @@ export function Contact() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <span className="text-mono text-primary/80 tracking-[0.5em] text-xs">
-            Contact
-          </span>
+          <span className="section-label mb-6 inline-flex">Contact</span>
           <h2 className="text-3xl md:text-4xl lg:text-5xl text-foreground mt-6">
             Have a project in mind?
             <br />
-            Let's <span className="text-primary">build it</span>.
+            Let&rsquo;s <span className="text-primary-light">build it</span>.
           </h2>
         </motion.div>
 
-        {/* Form - centered */}
+        {/* Form container */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.1 }}
         >
-          <form onSubmit={handleSubmit} className="space-y-4">
-            {/* Name & Email */}
-            <div className="grid md:grid-cols-2 gap-4">
-              <input
-                type="text"
-                placeholder="Name"
-                value={formData.name}
-                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                className="input-dark"
+          <div className="glass-card p-6 md:p-8">
+            <form onSubmit={handleSubmit} className="space-y-4">
+              {/* Name & Email */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <input
+                  type="text"
+                  placeholder="Name"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="input-dark"
+                  required
+                />
+                <input
+                  type="email"
+                  placeholder="Email"
+                  value={formData.email}
+                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                  className="input-dark"
+                  required
+                />
+              </div>
+
+              {/* Project type & Budget */}
+              <div className="grid md:grid-cols-2 gap-4">
+                <select
+                  value={formData.projectType}
+                  onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
+                  className="input-dark appearance-none cursor-pointer"
+                  required
+                >
+                  {projectTypes.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+                <select
+                  value={formData.budget}
+                  onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
+                  className="input-dark appearance-none cursor-pointer"
+                  required
+                >
+                  {budgetRanges.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Message */}
+              <textarea
+                placeholder="Tell me about your project..."
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                className="input-dark min-h-[140px] resize-none"
                 required
               />
-              <input
-                type="email"
-                placeholder="Email"
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                className="input-dark"
-                required
-              />
-            </div>
 
-            {/* Project type & Budget */}
-            <div className="grid md:grid-cols-2 gap-4">
-              <select
-                value={formData.projectType}
-                onChange={(e) => setFormData({ ...formData, projectType: e.target.value })}
-                className="input-dark appearance-none cursor-pointer"
-                required
+              {/* Status */}
+              {submitStatus === 'success' && (
+                <div className="flex items-center gap-2 text-green-400/80 text-sm bg-green-500/10 border border-green-500/20 rounded-xl px-4 py-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-green-400" />
+                  Message sent! I&rsquo;ll get back to you soon.
+                </div>
+              )}
+              {submitStatus === 'error' && (
+                <div className="flex items-center gap-2 text-red-400/80 text-sm bg-red-500/10 border border-red-500/20 rounded-xl px-4 py-3">
+                  <span className="w-1.5 h-1.5 rounded-full bg-red-400" />
+                  Failed to send. Please try again.
+                </div>
+              )}
+
+              {/* Submit */}
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                className="btn-primary w-full disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                {projectTypes.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-              <select
-                value={formData.budget}
-                onChange={(e) => setFormData({ ...formData, budget: e.target.value })}
-                className="input-dark appearance-none cursor-pointer"
-                required
-              >
-                {budgetRanges.map((option) => (
-                  <option key={option.value} value={option.value}>
-                    {option.label}
-                  </option>
-                ))}
-              </select>
-            </div>
-
-            {/* Message */}
-            <textarea
-              placeholder="Tell me about your project..."
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              className="input-dark min-h-[120px] resize-none"
-              required
-            />
-
-            {/* Status */}
-            {submitStatus === 'success' && (
-              <p className="text-green-500/70 text-sm">Message sent! I'll get back to you soon.</p>
-            )}
-            {submitStatus === 'error' && (
-              <p className="text-red-500/70 text-sm">Failed to send. Please try again.</p>
-            )}
-
-            {/* Submit */}
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              className="btn-primary w-full"
-            >
-              <span className="flex items-center justify-center gap-2">
-                {isSubmitting ? 'Sending...' : 'Send Message'}
-                <Send size={16} />
-              </span>
-            </button>
-          </form>
+                <span className="flex items-center justify-center gap-2">
+                  {isSubmitting ? 'Sending...' : 'Send Message'}
+                  <Send size={15} />
+                </span>
+              </button>
+            </form>
+          </div>
         </motion.div>
 
-        {/* Contact options - centered */}
+        {/* Contact options */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-16"
+          className="mt-10"
         >
-          <div className="flex flex-wrap justify-center gap-4">
-            <a
-              href="https://wa.me/919949357594"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-card border border-card-border hover:border-primary/30 text-text-muted hover:text-foreground transition-colors text-sm"
-            >
-              <MessageCircle size={16} />
-              WhatsApp
-            </a>
-            <a
-              href="mailto:nandurisrivatsa91@gmail.com"
-              className="flex items-center gap-2 px-4 py-2 bg-card border border-card-border hover:border-primary/30 text-text-muted hover:text-foreground transition-colors text-sm"
-            >
-              <Mail size={16} />
-              Email
-            </a>
-            <a
-              href="https://github.com/inqgamerz48"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-card border border-card-border hover:border-primary/30 text-text-muted hover:text-foreground transition-colors text-sm"
-            >
-              <Github size={16} />
-              GitHub
-            </a>
-            <a
-              href="https://www.linkedin.com/in/sriram-satya-srivatsa-nanduri-56229a35a"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex items-center gap-2 px-4 py-2 bg-card border border-card-border hover:border-primary/30 text-text-muted hover:text-foreground transition-colors text-sm"
-            >
-              <Linkedin size={16} />
-              LinkedIn
-            </a>
+          <div className="flex flex-wrap justify-center gap-3">
+            {contactLinks.map((link) => (
+              <a
+                key={link.label}
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 px-5 py-2.5 rounded-full bg-white/[0.03] border border-white/[0.06] text-text-muted hover:text-foreground hover:border-primary/30 hover:bg-primary/[0.04] transition-all duration-300 text-sm"
+              >
+                <link.icon size={15} />
+                {link.label}
+              </a>
+            ))}
           </div>
         </motion.div>
       </div>
