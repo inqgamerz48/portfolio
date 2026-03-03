@@ -28,46 +28,7 @@ const projects = [
     liveUrl: 'https://portfolio-inq.pages.dev',
     featured: true,
   },
-  {
-    title: 'TaskFlow',
-    description: 'Minimalist project management tool with real-time collaboration, Kanban boards, and team analytics.',
-    stack: ['Next.js', 'React', 'Firebase', 'Tailwind'],
-    githubUrl: 'https://github.com/inqgamerz48/taskflow',
-    liveUrl: null,
-    featured: false,
-  },
-  {
-    title: 'DevConnect',
-    description: 'Developer networking platform with matching algorithm, portfolio showcase, and chat functionality.',
-    stack: ['Next.js', 'TypeScript', 'PostgreSQL', 'Socket.io'],
-    githubUrl: 'https://github.com/inqgamerz48/devconnect',
-    liveUrl: null,
-    featured: false,
-  },
-  {
-    title: 'CodeSnippets',
-    description: 'Personal code library with syntax highlighting, tags, and cloud sync across devices.',
-    stack: ['React', 'Node.js', 'MongoDB', 'Monaco Editor'],
-    githubUrl: 'https://github.com/inqgamerz48/codesnippets',
-    liveUrl: null,
-    featured: false,
-  },
-  {
-    title: 'WeatherPulse',
-    description: 'Beautiful weather dashboard with forecasts, historical data visualization, and location-based alerts.',
-    stack: ['React', 'Weather APIs', 'D3.js', 'Tailwind'],
-    githubUrl: 'https://github.com/inqgamerz48/weatherpulse',
-    liveUrl: null,
-    featured: false,
-  },
-  {
-    title: 'URLShortner',
-    description: 'Fast URL shortening service with custom aliases, analytics dashboard, and QR code generation.',
-    stack: ['Node.js', 'Express', 'Redis', 'PostgreSQL'],
-    githubUrl: 'https://github.com/inqgamerz48/urlshortner',
-    liveUrl: null,
-    featured: false,
-  },
+
 ]
 
 export function Projects() {
