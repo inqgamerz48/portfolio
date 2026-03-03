@@ -1,36 +1,41 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ArrowUpRight } from 'lucide-react'
 
-const projects = [
-  {
-    title: 'BizTrackr PRO',
-    description: 'Multi-tenant SaaS — Inventory, POS, CRM, Financial Ledgers',
-    stack: 'Next.js · TypeScript · FastAPI · PostgreSQL · Docker',
-    year: '2024',
-    githubUrl: 'https://github.com/inqgamerz48/biztrackr-grand-enterprise',
-    liveUrl: null,
-  },
-  {
-    title: 'UNI Manager',
-    description: 'Enterprise university management — RBAC, attendance, analytics',
-    stack: 'Next.js · TypeScript · PostgreSQL · Prisma · Firebase',
-    year: '2024',
-    githubUrl: 'https://github.com/inqgamerz48/final-unimamanger',
-    liveUrl: null,
-  },
-  {
-    title: 'INQ Portfolio V1',
-    description: 'Cinematic portfolio — gamification, anime, easter eggs',
-    stack: 'HTML · CSS · Vanilla JS · FastAPI · SQLite',
-    year: '2023',
-    githubUrl: null,
-    liveUrl: 'https://portfolio-inq.pages.dev',
-  },
-]
+interface Project {
+  id: string
+  title: string
+  description: string
+  stack: string[]
+  githubUrl: string | null
+  liveUrl: string | null
+  year: string
+}
 
 export function Projects() {
+  const [projects, setProjects] = useState<Project[]>([])
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    fetch('/api/projects')
+      .then(res => res.json())
+      .then(data => {
+        // Map data to handle missing fields if any, and extract a year from createdAt
+        const formattedData = Array.isArray(data) ? data.map(p => ({
+          ...p,
+          year: new Date(p.createdAt).getFullYear().toString()
+        })) : []
+        setProjects(formattedData)
+        setLoading(false)
+      })
+      .catch(err => {
+        console.error('Failed to fetch projects', err)
+        setLoading(false)
+      })
+  }, [])
+
   return (
     <section id="projects" className="section-wrapper">
       <div className="section-inner">
@@ -53,10 +58,31 @@ export function Projects() {
           <span>Year</span>
         </div>
 
+        {/* Loading State */}
+        {loading && (
+          <div className="py-12 space-y-6">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="flex gap-8 border-b border-parchment/[0.04] pb-6">
+                <div className="w-8 h-4 bg-ink rounded animate-pulse" />
+                <div className="flex-1 space-y-3">
+                  <div className="w-48 h-6 bg-ink rounded animate-pulse" />
+                  <div className="w-full h-4 bg-ink rounded animate-pulse" />
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
+        {!loading && projects.length === 0 && (
+          <div className="py-12 text-center text-mist">
+            <p className="font-mono text-sm uppercase tracking-widest">No projects available</p>
+          </div>
+        )}
+
         {/* Project rows */}
-        {projects.map((project, i) => (
+        {!loading && projects.length > 0 && projects.map((project, i) => (
           <motion.div
-            key={project.title}
+            key={project.id}
             initial={{ opacity: 0, y: 15 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -91,7 +117,9 @@ export function Projects() {
               </div>
 
               {/* Stack — desktop only */}
-              <p className="hidden md:block text-mono-sm text-ash">{project.stack}</p>
+              <p className="hidden md:block text-mono-sm text-ash">
+                {Array.isArray(project.stack) ? project.stack.join(' · ') : project.stack}
+              </p>
 
               {/* Year + links */}
               <div className="hidden md:flex items-center gap-6">
