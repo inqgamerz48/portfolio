@@ -32,13 +32,10 @@ const projects = [
 ]
 
 export function Projects() {
-  const featured = projects.filter((p) => p.featured)
-  const others = projects.filter((p) => !p.featured)
-
   return (
     <section id="projects" className="section-wrapper relative bg-[#06060a]">
       <div className="section-divider-top" />
-      <div className="section-inner max-w-5xl mx-auto">
+      <div className="section-inner max-w-6xl mx-auto">
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -55,60 +52,60 @@ export function Projects() {
           </h2>
         </motion.div>
 
-        {/* Featured projects — large cards */}
-        <div className="space-y-5 mb-8">
-          {featured.map((project, index) => (
+        {/* Projects grid — 3-column cards */}
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project, index) => (
             <motion.div
               key={project.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.08 }}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group"
             >
-              <div className="glass-card p-6 md:p-8 relative overflow-hidden">
-                {/* Subtle gradient overlay on hover */}
+              <div className="glass-card p-7 md:p-8 h-full relative overflow-hidden flex flex-col">
+                {/* Gradient overlay on hover */}
                 <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.04] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-2xl" />
 
-                <div className="relative z-10 flex flex-col lg:flex-row lg:items-center gap-5">
-                  {/* Project info */}
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-3">
-                      <span className="flex items-center gap-1.5 text-mono text-primary/60 text-[10px] tracking-[0.15em]">
-                        <Star size={10} className="fill-primary/60" />
-                        FEATURED
+                <div className="relative z-10 flex flex-col h-full">
+                  {/* Header */}
+                  <div className="flex items-center justify-between mb-5">
+                    <span className="flex items-center gap-1.5 text-mono text-primary/60 text-[10px] tracking-[0.15em]">
+                      <Star size={10} className="fill-primary/60" />
+                      FEATURED
+                    </span>
+                    <span className="text-mono text-text-muted/20 text-xs">
+                      {String(index + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+
+                  {/* Title */}
+                  <h3 className="text-2xl md:text-3xl text-foreground group-hover:text-primary-light transition-colors duration-300 font-display mb-4">
+                    {project.title}
+                  </h3>
+
+                  {/* Description */}
+                  <p className="text-text-muted/60 leading-relaxed mb-6 flex-grow">
+                    {project.description}
+                  </p>
+
+                  {/* Tech stack */}
+                  <div className="flex flex-wrap gap-2 mb-6">
+                    {project.stack.map((tech) => (
+                      <span key={tech} className="skill-pill text-[11px]">
+                        {tech}
                       </span>
-                      <span className="text-mono text-text-muted/20 text-xs">
-                        {String(index + 1).padStart(2, '0')}
-                      </span>
-                    </div>
-
-                    <h3 className="text-2xl md:text-3xl text-foreground group-hover:text-primary-light transition-colors duration-300 font-display">
-                      {project.title}
-                    </h3>
-
-                    <p className="text-text-muted/60 mt-3 max-w-2xl leading-relaxed">
-                      {project.description}
-                    </p>
-
-                    {/* Tech stack */}
-                    <div className="flex flex-wrap gap-2 mt-4">
-                      {project.stack.map((tech) => (
-                        <span key={tech} className="skill-pill text-[11px]">
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
+                    ))}
                   </div>
 
                   {/* Links */}
-                  <div className="flex items-center gap-3 lg:flex-shrink-0">
+                  <div className="flex items-center gap-3 pt-5 border-t border-white/[0.06]">
                     {project.githubUrl && (
                       <a
                         href={project.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06] text-text-muted hover:text-foreground hover:border-white/[0.12] transition-all text-sm"
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-white/[0.03] border border-white/[0.06] text-text-muted hover:text-foreground hover:border-white/[0.12] transition-all text-sm flex-1 justify-center"
                       >
                         <Github size={15} />
                         Code
@@ -119,7 +116,7 @@ export function Projects() {
                         href={project.liveUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary/10 border border-primary/20 text-primary-light hover:bg-primary/15 transition-all text-sm"
+                        className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-primary/10 border border-primary/20 text-primary-light hover:bg-primary/15 transition-all text-sm flex-1 justify-center"
                       >
                         <ExternalLink size={15} />
                         Live
@@ -132,55 +129,13 @@ export function Projects() {
           ))}
         </div>
 
-        {/* Other projects — compact grid */}
-        <div className="grid md:grid-cols-2 gap-4">
-          {others.map((project, index) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: index * 0.06 }}
-              className="group"
-            >
-              <div className="glass-card-sm p-5 h-full">
-                <div className="flex items-start justify-between mb-3">
-                  <h3 className="text-lg text-foreground group-hover:text-primary-light transition-colors duration-300 font-display">
-                    {project.title}
-                  </h3>
-                  {project.githubUrl && (
-                    <a
-                      href={project.githubUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-text-muted/40 hover:text-foreground transition-colors p-1"
-                    >
-                      <Github size={15} />
-                    </a>
-                  )}
-                </div>
-                <p className="text-text-muted/50 text-sm leading-relaxed mb-4">
-                  {project.description}
-                </p>
-                <div className="flex flex-wrap gap-1.5">
-                  {project.stack.map((tech) => (
-                    <span key={tech} className="text-mono text-[10px] text-text-muted/40">
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-
         {/* View all link */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="mt-12 text-center"
+          className="mt-14 text-center"
         >
           <a
             href="https://github.com/inqgamerz48"
