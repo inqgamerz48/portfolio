@@ -48,7 +48,7 @@ export function Projects() {
           <h2 className="section-title">Selected Work</h2>
         </motion.div>
 
-        <div className="grid gap-6">
+        <div className="grid gap-8">
           {staticProjects.map((p, i) => (
             <motion.div
               key={p.id}
@@ -56,39 +56,41 @@ export function Projects() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.4, delay: i * 0.08 }}
-              className="card-dark p-4 md:p-6"
+              className="card-dark p-5 md:p-8"
             >
-              <div className="flex flex-col md:flex-row gap-4">
-                <div className="w-full md:w-48 h-32 bg-ink rounded overflow-hidden flex-shrink-0">
+              <div className="flex flex-col lg:flex-row gap-6">
+                <div className="w-full lg:w-80 h-48 lg:h-56 bg-ink rounded overflow-hidden flex-shrink-0">
                   <img 
                     src={p.image} 
                     alt={p.title}
                     className="w-full h-full object-cover"
                   />
                 </div>
-                <div className="flex-1">
+                <div className="flex-1 flex flex-col justify-center">
                   <div className="flex items-start justify-between">
                     <div>
-                      <h3 className="font-display text-lg md:text-xl text-parchment tracking-wider">{p.title}</h3>
-                      <p className="text-mist text-sm mt-1">{p.description}</p>
+                      <h3 className="font-display text-2xl md:text-3xl text-parchment tracking-wider">{p.title}</h3>
+                      <p className="text-mist mt-2">{p.description}</p>
+                    </div>
+                  </div>
+                  <div className="mt-4 flex items-center justify-between">
+                    <div className="flex items-center gap-3 text-mono-sm text-ash">
+                      {p.stack.map((s) => (
+                        <span key={s}>{s}</span>
+                      ))}
+                      <span className="ml-2">{p.year}</span>
                     </div>
                     {p.liveUrl && (
                       <a 
                         href={p.liveUrl} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="btn-ghost text-xs" 
+                        className="btn-primary text-xs" 
                         data-cursor-hover
                       >
-                        Live <ArrowUpRight size={10} />
+                        View Live <ArrowUpRight size={12} />
                       </a>
                     )}
-                  </div>
-                  <div className="mt-3 flex items-center gap-3 text-mono-sm text-ash">
-                    {p.stack.map((s) => (
-                      <span key={s}>{s}</span>
-                    ))}
-                    <span className="ml-2">{p.year}</span>
                   </div>
                 </div>
               </div>
