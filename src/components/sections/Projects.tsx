@@ -14,6 +14,12 @@ interface Project {
   year: string
 }
 
+const projectImages: Record<string, string> = {
+  'Ember & Ash': '/projects/ember-ash.svg',
+  'Meridian Properties': '/projects/meridian-properties.svg',
+  'BizTrackr': '/projects/biztrackr.svg',
+}
+
 export function Projects() {
   const [projects, setProjects] = useState<Project[]>([])
   const [loading, setLoading] = useState(true)
@@ -51,7 +57,8 @@ export function Projects() {
         </motion.div>
 
         {/* Table header */}
-        <div className="hidden md:grid grid-cols-[3rem_1fr_1fr_auto] gap-8 pb-3 border-b border-parchment/[0.06] text-mono-sm text-ash mb-0">
+        <div className="hidden md:grid grid-cols-[auto_3rem_1fr_1fr_auto] gap-8 pb-3 border-b border-parchment/[0.06] text-mono-sm text-ash mb-0">
+          <span>Preview</span>
           <span>#</span>
           <span>Project</span>
           <span>Stack</span>
@@ -90,6 +97,17 @@ export function Projects() {
             className="group"
           >
             <div className="table-row">
+              {/* Preview Image */}
+              <div className="hidden md:block w-24 h-14 bg-ink rounded overflow-hidden">
+                {projectImages[project.title] && (
+                  <img 
+                    src={projectImages[project.title]} 
+                    alt={project.title}
+                    className="w-full h-full object-cover"
+                  />
+                )}
+              </div>
+
               {/* Number */}
               <span className="text-mono-sm text-ash/40">
                 {String(i + 1).padStart(2, '0')}
