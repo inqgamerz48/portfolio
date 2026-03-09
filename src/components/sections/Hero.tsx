@@ -47,7 +47,7 @@ export function Hero() {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 1 }}
-              className="mt-4 md:mt-6 max-w-lg text-sm md:text-base text-mist leading-relaxed"
+              className="mt-4 md:mt-6 max-w-lg text-base md:text-lg text-mist leading-relaxed"
             >
               {subhead}
             </motion.p>
@@ -58,15 +58,15 @@ export function Hero() {
               transition={{ duration: 0.5, delay: 1.2 }}
               className="mt-8 flex items-center gap-6 flex-wrap"
             >
-              <a href="#projects" className="btn-primary" data-cursor-hover>See my work</a>
-              <a href="#contact" className="btn-ghost" data-cursor-hover>Let's talk</a>
+              <a href="#projects" className="btn-primary text-sm px-8 py-3" data-cursor-hover>See my work</a>
+              <a href="#contact" className="btn-ghost text-sm" data-cursor-hover>Let's talk</a>
             </motion.div>
 
             <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               transition={{ duration: 0.5, delay: 1.4 }}
-              className="mt-8 text-mist"
+              className="mt-8 text-base text-mist"
             >
               {trustLine}
             </motion.div>
@@ -77,7 +77,7 @@ export function Hero() {
               transition={{ duration: 0.6, delay: 1.5 }}
               className="mt-6 p-4 border-l-4 border-parchment/60 bg-ink/60 rounded-sm"
             >
-              <p className="text-mist italic">{quote}</p>
+              <p className="text-base text-mist italic">{quote}</p>
             </motion.blockquote>
 
             <motion.div
