@@ -74,7 +74,7 @@ body {
   color: var(--parchment);
   font-family: "DM Mono", monospace;
   font-weight: 400;
-  font-size: 0.75rem;
+  font-size: 0.9rem;
   overflow-x: hidden;
   line-height: 1.7;
   cursor: none;
@@ -292,7 +292,7 @@ select {
 
 .text-mono-sm {
   font-family: "DM Mono", monospace;
-  font-size: 0.7rem;
+  font-size: 0.75rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
