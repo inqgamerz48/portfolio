@@ -19,6 +19,9 @@ export function Hero() {
     <section className="relative min-h-screen flex flex-col justify-end pb-0 px-6 lg:px-8 overflow-hidden">
       <div className="grid-overlay" />
       <div className="crimson-glow" />
+      <div className="blue-glow" />
+      <div className="gold-glow" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-void/50 to-void" />
 
       <div className="max-w-7xl mx-auto w-full relative z-10 pb-16">
         <motion.div

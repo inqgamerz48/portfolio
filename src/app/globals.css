@@ -159,10 +159,31 @@ select {
 }
 
 /* ═══════════════════════════════════════
-   GRID OVERLAY
-   ═══════════════════════════════════════ */
+    GRID OVERLAY
+    ═══════════════════════════════════════ */
+
+@keyframes grid-move {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(60px);
+  }
+}
 
 .grid-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(232, 228, 240, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 228, 240, 0.03) 1px, transparent 1px);
+  background-size: 60px 60px;
+  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%);
+  animation: grid-move 20s linear infinite;
+}
+
+.grid-overlay-fixed {
   position: absolute;
   inset: 0;
   pointer-events: none;
@@ -372,8 +393,23 @@ select {
 }
 
 /* ═══════════════════════════════════════
-   ATMOSPHERIC GLOW
-   ═══════════════════════════════════════ */
+    ATMOSPHERIC GLOW
+    ═══════════════════════════════════════ */
+
+@keyframes float-glow {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+    opacity: 0.3;
+  }
+  33% {
+    transform: translate(30px, -20px) scale(1.1);
+    opacity: 0.5;
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.95);
+    opacity: 0.4;
+  }
+}
 
 .crimson-glow {
   position: absolute;
@@ -387,10 +423,60 @@ select {
   position: absolute;
   top: -30%;
   right: -15%;
-  width: 50%;
-  height: 70%;
-  background: radial-gradient(ellipse, rgba(196, 18, 48, 0.05) 0%, transparent 70%);
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(ellipse, rgba(196, 18, 48, 0.15) 0%, transparent 70%);
   animation: pulse-glow 8s ease-in-out infinite;
+}
+
+.crimson-glow::after {
+  content: '';
+  position: absolute;
+  bottom: -20%;
+  left: -10%;
+  width: 40%;
+  height: 60%;
+  background: radial-gradient(ellipse, rgba(255, 61, 82, 0.08) 0%, transparent 60%);
+  animation: float-glow 12s ease-in-out infinite;
+  animation-delay: -4s;
+}
+
+.blue-glow {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.blue-glow::before {
+  content: '';
+  position: absolute;
+  top: 20%;
+  left: -20%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
+  animation: float-glow 15s ease-in-out infinite;
+  animation-delay: -6s;
+}
+
+.gold-glow {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.gold-glow::before {
+  content: '';
+  position: absolute;
+  bottom: 10%;
+  right: 10%;
+  width: 30%;
+  height: 40%;
+  background: radial-gradient(ellipse, rgba(212, 168, 83, 0.06) 0%, transparent 60%);
+  animation: float-glow 10s ease-in-out infinite;
+  animation-delay: -3s;
 }
 
 @keyframes pulse-glow {

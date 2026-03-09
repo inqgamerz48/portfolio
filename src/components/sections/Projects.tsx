@@ -38,8 +38,10 @@ const staticProjects = [
 
 export function Projects() {
   return (
-    <section id="projects" className="section-wrapper">
-      <div className="section-inner">
+    <section id="projects" className="section-wrapper relative">
+      <div className="grid-overlay-fixed" />
+      <div className="crimson-glow" />
+      <div className="section-inner relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}

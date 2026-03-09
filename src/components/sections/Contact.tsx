@@ -9,7 +9,9 @@ export function Contact() {
 
   return (
     <section id="contact" className="section-wrapper relative">
+      <div className="grid-overlay-fixed" />
       <div className="crimson-glow" />
+      <div className="blue-glow" />
 
       <div className="section-inner relative z-10">
         <motion.div

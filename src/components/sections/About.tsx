@@ -4,8 +4,10 @@ import { motion } from 'framer-motion'
 
 export function About() {
   return (
-    <section id="about" className="section-wrapper">
-      <div className="section-inner">
+    <section id="about" className="section-wrapper relative">
+      <div className="grid-overlay-fixed" />
+      <div className="crimson-glow" />
+      <div className="section-inner relative z-10">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
