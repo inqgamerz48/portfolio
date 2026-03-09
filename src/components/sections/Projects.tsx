@@ -11,7 +11,7 @@ const staticProjects = [
     stack: ['Website'],
     year: '2026',
     image: '/projects/ember-ash.svg',
-    liveUrl: 'https://ember-ash.vercel.app',
+    liveUrl: 'https://inq-restaurant-demo.vercel.app/',
   },
   {
     id: 'meridian-properties',
@@ -20,7 +20,7 @@ const staticProjects = [
     stack: ['Website'],
     year: '2026',
     image: '/projects/meridian-properties.svg',
-    liveUrl: 'https://meridian-properties.vercel.app',
+    liveUrl: 'https://inq-realestate-demo.vercel.app/',
   },
   {
     id: 'biztrackr',
@@ -29,7 +29,7 @@ const staticProjects = [
     stack: ['Web App'],
     year: '2026',
     image: '/projects/biztrackr.svg',
-    liveUrl: 'https://biztrackr.vercel.app',
+    liveUrl: 'https://biztrackr-grand-enterprise.vercel.app/',
   },
 ]
 
