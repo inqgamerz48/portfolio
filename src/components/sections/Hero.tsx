@@ -2,35 +2,34 @@
 
 import { motion } from 'framer-motion'
 
+const tagline = 'Available for projects'
+const headline = "I am INQ. I build SaaS and full-stack sites and apps including websites."
+const subhead = "Custom sites, web apps, and tools — built fast, easy for you to manage, and designed to actually convert visitors into customers."
+const trustLine = "Websites · Web Apps · SaaS · APIs · Automation · Mobile"
+const quote = `"I started building because too many small businesses were overpaying for average results."`
+
 const stats = [
   { num: '4+', label: 'Years Experience' },
-  { num: '150+', label: 'Deployments' },
-  { num: '10+', label: 'Products Shipped' },
-  { num: '∞', label: 'Lines of Code' },
+  { num: '15+', label: 'Projects completed' },
+  { num: '100%', label: 'Client satisfaction' },
 ]
 
 export function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col justify-end pb-0 px-6 lg:px-8 overflow-hidden">
-      {/* Grid overlay */}
       <div className="grid-overlay" />
-
-      {/* Atmospheric glow */}
       <div className="crimson-glow" />
 
       <div className="max-w-7xl mx-auto w-full relative z-10 pb-16">
-        {/* Eyebrow */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.3 }}
-          className="flex items-center gap-3 mb-8"
+          className="mb-4 text-mono-sm text-mist"
         >
-          <span className="status-dot" />
-          <span className="text-mono-sm text-mist">Full Stack Developer — Available for work</span>
+          {tagline}
         </motion.div>
 
-        {/* Main title */}
         <div className="overflow-hidden">
           <motion.h1
             initial={{ y: '110%' }}
@@ -38,57 +37,60 @@ export function Hero() {
             transition={{ duration: 0.7, delay: 0.5, ease: [0.16, 1, 0.3, 1] }}
             className="text-display text-parchment"
           >
-            I BUILD
-          </motion.h1>
-        </div>
-        <div className="overflow-hidden">
-          <motion.h1
-            initial={{ y: '110%' }}
-            animate={{ y: 0 }}
-            transition={{ duration: 0.7, delay: 0.6, ease: [0.16, 1, 0.3, 1] }}
-            className="text-display"
-          >
-            <span className="text-serif-italic text-flame" style={{ fontSize: '0.85em' }}>systems</span>{' '}
-            THAT SHIP
+            {headline}
           </motion.h1>
         </div>
 
-        {/* Subtitle */}
         <motion.p
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1 }}
-          className="mt-8 max-w-md text-mist leading-relaxed"
+          className="mt-6 max-w-md text-mist leading-relaxed"
         >
-          Solo developer building production-grade SaaS platforms,
-          enterprise systems, and AI-integrated products.
+          {subhead}
         </motion.p>
 
-        {/* CTA */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 1.3 }}
-          className="mt-10 flex items-center gap-8"
+          transition={{ duration: 0.5, delay: 1.2 }}
+          className="mt-8 flex items-center gap-6 flex-wrap"
         >
-          <a href="#projects" className="btn-primary" data-cursor-hover>View Work</a>
-          <a href="#contact" className="btn-ghost" data-cursor-hover>Get in Touch →</a>
+          <a href="#projects" className="btn-primary" data-cursor-hover>See my work</a>
+          <a href="#contact" className="btn-ghost" data-cursor-hover>Let's talk</a>
         </motion.div>
 
-        {/* Stats grid — big numbers */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 1.6 }}
-          className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-0 border-t border-parchment/[0.06]"
+          transition={{ duration: 0.5, delay: 1.4 }}
+          className="mt-8 text-mist"
+        >
+          {trustLine}
+        </motion.div>
+
+        <motion.blockquote
+          initial={{ opacity: 0, y: 6 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 1.5 }}
+          className="mt-6 p-4 border-l-4 border-parchment/60 bg-ink/60 rounded-sm"
+        >
+          <p className="text-mist italic">{quote}</p>
+        </motion.blockquote>
+
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 1.8 }}
+          className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-0 border-t border-parchment/[0.06]"
         >
           {stats.map((stat, i) => (
             <div
               key={stat.label}
-              className={`py-8 ${i > 0 ? 'border-l border-parchment/[0.06]' : ''} text-center`}
+              className={`py-6 text-center ${i > 0 ? 'border-l border-parchment/[0.06]' : ''}`}
             >
-              <p className="font-display text-4xl md:text-5xl text-parchment tracking-wider">{stat.num}</p>
-              <p className="text-mono-sm text-ash mt-2">{stat.label}</p>
+              <p className="font-display text-2xl md:text-3xl text-parchment tracking-wider">{stat.num}</p>
+              <p className="text-mono-sm text-ash mt-1">{stat.label}</p>
             </div>
           ))}
         </motion.div>

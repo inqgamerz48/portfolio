@@ -1,47 +1,32 @@
 'use client'
 
-import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
-import { ArrowUpRight } from 'lucide-react'
 
-interface Project {
-  id: string
-  title: string
-  description: string
-  stack: string[]
-  githubUrl: string | null
-  liveUrl: string | null
-  year: string
-}
-
-const projectImages: Record<string, string> = {
-  'Ember & Ash': '/projects/ember-ash.svg',
-  'Meridian Properties': '/projects/meridian-properties.svg',
-  'BizTrackr': '/projects/biztrackr.svg',
-}
+const staticProjects = [
+  {
+    id: 'ember-ash',
+    title: 'Ember & Ash',
+    description: 'A restaurant that needed to fill tables, not just look good online.',
+    stack: ['Website'],
+    year: '2026',
+  },
+  {
+    id: 'meridian-properties',
+    title: 'Meridian Properties',
+    description: 'Real estate that needed to look as premium as its listings.',
+    stack: ['Website'],
+    year: '2026',
+  },
+  {
+    id: 'biztrackr',
+    title: 'BizTrackr',
+    description: 'A small business drowning in spreadsheets needed a real system.',
+    stack: ['Web App'],
+    year: '2026',
+  },
+]
 
 export function Projects() {
-  const [projects, setProjects] = useState<Project[]>([])
-  const [loading, setLoading] = useState(true)
-
-  useEffect(() => {
-    fetch('/api/projects')
-      .then(res => res.json())
-      .then(data => {
-        // Map data to handle missing fields if any, and extract a year from createdAt
-        const formattedData = Array.isArray(data) ? data.map(p => ({
-          ...p,
-          year: new Date(p.createdAt).getFullYear().toString()
-        })) : []
-        setProjects(formattedData)
-        setLoading(false)
-      })
-      .catch(err => {
-        console.error('Failed to fetch projects', err)
-        setLoading(false)
-      })
-  }, [])
-
   return (
     <section id="projects" className="section-wrapper">
       <div className="section-inner">
@@ -56,117 +41,31 @@ export function Projects() {
           <h2 className="section-title">Selected Work</h2>
         </motion.div>
 
-        {/* Table header */}
-        <div className="hidden md:grid grid-cols-[auto_3rem_1fr_1fr_auto] gap-8 pb-3 border-b border-parchment/[0.06] text-mono-sm text-ash mb-0">
-          <span>Preview</span>
-          <span>#</span>
-          <span>Project</span>
-          <span>Stack</span>
-          <span>Year</span>
+        <div className="grid gap-6">
+          {staticProjects.map((p, i) => (
+            <motion.div
+              key={p.id}
+              initial={{ opacity: 0, y: 15 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4, delay: i * 0.08 }}
+              className="card-dark p-6"
+            >
+              <div className="flex items-start justify-between">
+                <div>
+                  <h3 className="font-display text-xl text-parchment tracking-wider">{p.title}</h3>
+                  <p className="text-mist text-sm mt-1">{p.description}</p>
+                </div>
+              </div>
+              <div className="mt-3 flex items-center gap-3 text-mono-sm text-ash">
+                {p.stack.map((s) => (
+                  <span key={s}>{s}</span>
+                ))}
+                <span className="ml-2">{p.year}</span>
+              </div>
+            </motion.div>
+          ))}
         </div>
-
-        {/* Loading State */}
-        {loading && (
-          <div className="py-12 space-y-6">
-            {[1, 2, 3].map((i) => (
-              <div key={i} className="flex gap-8 border-b border-parchment/[0.04] pb-6">
-                <div className="w-8 h-4 bg-ink rounded animate-pulse" />
-                <div className="flex-1 space-y-3">
-                  <div className="w-48 h-6 bg-ink rounded animate-pulse" />
-                  <div className="w-full h-4 bg-ink rounded animate-pulse" />
-                </div>
-              </div>
-            ))}
-          </div>
-        )}
-
-        {!loading && projects.length === 0 && (
-          <div className="py-12 text-center text-mist">
-            <p className="font-mono text-sm uppercase tracking-widest">No projects available</p>
-          </div>
-        )}
-
-        {/* Project rows */}
-        {!loading && projects.length > 0 && projects.map((project, i) => (
-          <motion.div
-            key={project.id}
-            initial={{ opacity: 0, y: 15 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.4, delay: i * 0.08 }}
-            className="group"
-          >
-            <div className="table-row">
-              {/* Preview Image */}
-              <div className="hidden md:block w-24 h-14 bg-ink rounded overflow-hidden">
-                {projectImages[project.title] && (
-                  <img 
-                    src={projectImages[project.title]} 
-                    alt={project.title}
-                    className="w-full h-full object-cover"
-                  />
-                )}
-              </div>
-
-              {/* Number */}
-              <span className="text-mono-sm text-ash/40">
-                {String(i + 1).padStart(2, '0')}
-              </span>
-
-              {/* Title + description */}
-              <div>
-                <h3 className="font-display text-2xl md:text-3xl text-parchment group-hover:text-flame transition-colors tracking-wider" data-cursor-hover>
-                  {project.title}
-                </h3>
-                <p className="text-mist text-sm mt-1">{project.description}</p>
-                {/* Links — visible on mobile */}
-                <div className="flex gap-4 mt-3 md:hidden">
-                  {project.githubUrl && (
-                    <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost" data-cursor-hover>
-                      Source <ArrowUpRight size={10} />
-                    </a>
-                  )}
-                  {project.liveUrl && (
-                    <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost" data-cursor-hover>
-                      Live <ArrowUpRight size={10} />
-                    </a>
-                  )}
-                </div>
-              </div>
-
-              {/* Stack — desktop only */}
-              <p className="hidden md:block text-mono-sm text-ash">
-                {Array.isArray(project.stack) ? project.stack.join(' · ') : project.stack}
-              </p>
-
-              {/* Year + links */}
-              <div className="hidden md:flex items-center gap-6">
-                <span className="text-mono-sm text-ash">{project.year}</span>
-                {project.githubUrl && (
-                  <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost" data-cursor-hover>
-                    Source <ArrowUpRight size={10} />
-                  </a>
-                )}
-                {project.liveUrl && (
-                  <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="btn-ghost" data-cursor-hover>
-                    Live <ArrowUpRight size={10} />
-                  </a>
-                )}
-              </div>
-            </div>
-          </motion.div>
-        ))}
-
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          className="mt-10"
-        >
-          <a href="https://github.com/inqgamerz48" target="_blank" rel="noopener noreferrer" className="btn-ghost" data-cursor-hover>
-            View all on GitHub <ArrowUpRight size={10} />
-          </a>
-        </motion.div>
       </div>
     </section>
   )

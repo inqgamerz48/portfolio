@@ -35,38 +35,41 @@ export function Contact() {
           className="section-header"
         >
           <span className="section-num">006</span>
-          <h2 className="section-title">Contact</h2>
+          <h2 className="section-title">Let's talk about your project</h2>
         </motion.div>
 
         <div className="grid lg:grid-cols-2 gap-16">
-          <motion.form
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="space-y-5"
-          >
-            <div>
-              <label className="text-mono-sm text-ash block mb-2">Name</label>
-              <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="input-dark" placeholder="Your name" required />
-            </div>
-            <div>
-              <label className="text-mono-sm text-ash block mb-2">Email</label>
-              <input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="input-dark" placeholder="your@email.com" required />
-            </div>
-            <div>
-              <label className="text-mono-sm text-ash block mb-2">Message</label>
-              <textarea value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="input-dark" placeholder="Tell me about your project..." rows={5} required />
-            </div>
+          <div>
+            <p className="text-mist mb-8">Tell me what you're building. I'll get back to you within 24 hours.</p>
+            <motion.form
+              onSubmit={handleSubmit}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="space-y-5"
+            >
+              <div>
+                <label className="text-mono-sm text-ash block mb-2">Name</label>
+                <input type="text" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} className="input-dark" placeholder="Your name" required />
+              </div>
+              <div>
+                <label className="text-mono-sm text-ash block mb-2">Email</label>
+                <input type="email" value={formData.email} onChange={(e) => setFormData({ ...formData, email: e.target.value })} className="input-dark" placeholder="your@email.com" required />
+              </div>
+              <div>
+                <label className="text-mono-sm text-ash block mb-2">Message</label>
+                <textarea value={formData.message} onChange={(e) => setFormData({ ...formData, message: e.target.value })} className="input-dark" placeholder="Tell me about your project..." rows={5} required />
+              </div>
 
-            <button type="submit" disabled={status === 'sending'} className="btn-primary" data-cursor-hover>
-              {status === 'sending' ? 'Sending...' : 'Send Message'} <Send size={12} />
-            </button>
+              <button type="submit" disabled={status === 'sending'} className="btn-primary" data-cursor-hover>
+                {status === 'sending' ? 'Sending...' : 'Send Message'} <Send size={12} />
+              </button>
 
-            {status === 'success' && <p className="text-mono-sm text-green mt-3">Message sent. I&apos;ll respond soon.</p>}
-            {status === 'error' && <p className="text-mono-sm text-flame mt-3">Something went wrong. Try again.</p>}
-          </motion.form>
+              {status === 'success' && <p className="text-mono-sm text-green mt-3">Message sent. I&apos;ll respond soon.</p>}
+              {status === 'error' && <p className="text-mono-sm text-flame mt-3">Something went wrong. Try again.</p>}
+            </motion.form>
+          </div>
 
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -77,7 +80,7 @@ export function Contact() {
           >
             <div>
               <p className="text-mono-sm text-ash mb-1">Email</p>
-              <a href="mailto:inqgamerz48@gmail.com" className="text-parchment hover:text-flame transition-colors" data-cursor-hover>inqgamerz48@gmail.com</a>
+              <a href="mailto:inqbuilds@gmail.com" className="text-parchment hover:text-flame transition-colors" data-cursor-hover>inqbuilds@gmail.com</a>
             </div>
             <div>
               <p className="text-mono-sm text-ash mb-1">GitHub</p>
