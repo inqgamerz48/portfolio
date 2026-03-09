@@ -7,8 +7,9 @@ const staticProjects = [
   {
     id: 'ember-ash',
     title: 'Ember & Ash',
-    description: 'A restaurant that needed to fill tables, not just look good online.',
-    stack: ['Website'],
+    description: 'A modern restaurant website featuring online reservations, dynamic menu display with categories, about section, contact form, and gallery. Built for table bookings and customer engagement.',
+    features: ['Online Reservations', 'Menu Management', 'Contact Form', 'Gallery', 'Responsive Design'],
+    stack: ['Next.js', 'TypeScript', 'Tailwind'],
     year: '2026',
     image: '/projects/ss1.PNG',
     liveUrl: 'https://inq-restaurant-demo.vercel.app/',
@@ -16,8 +17,9 @@ const staticProjects = [
   {
     id: 'meridian-properties',
     title: 'Meridian Properties',
-    description: 'Real estate that needed to look as premium as its listings.',
-    stack: ['Website'],
+    description: 'A premium real estate showcase with property listings, detailed property pages, search/filter functionality, agent profiles, and contact integration. Designed to convert leads into clients.',
+    features: ['Property Listings', 'Search & Filter', 'Agent Profiles', 'Lead Generation', 'Gallery'],
+    stack: ['Next.js', 'TypeScript', 'Tailwind'],
     year: '2026',
     image: '/projects/ss2.PNG',
     liveUrl: 'https://inq-realestate-demo.vercel.app/',
@@ -25,8 +27,9 @@ const staticProjects = [
   {
     id: 'biztrackr',
     title: 'BizTrackr',
-    description: 'A small business drowning in spreadsheets needed a real system.',
-    stack: ['Web App'],
+    description: 'A comprehensive business management dashboard with inventory tracking, sales analytics, employee management, invoice generation, and real-time reporting. Replaced spreadsheets with a real system.',
+    features: ['Inventory Management', 'Sales Analytics', 'Employee Management', 'Invoice Generation', 'Real-time Reporting'],
+    stack: ['Next.js', 'React', 'TypeScript', 'Tailwind', 'FastAPI', 'PostgreSQL'],
     year: '2026',
     image: '/projects/ss4.PNG',
     liveUrl: 'https://biztrackr-grand-enterprise.vercel.app/',
@@ -71,10 +74,15 @@ export function Projects() {
                     <div>
                       <h3 className="font-display text-2xl md:text-3xl text-parchment tracking-wider">{p.title}</h3>
                       <p className="text-mist mt-2">{p.description}</p>
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        {p.features.map((f) => (
+                          <span key={f} className="text-xs text-ash bg-ink px-2 py-1 rounded">{f}</span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                   <div className="mt-4 flex items-center justify-between">
-                    <div className="flex items-center gap-3 text-mono-sm text-ash">
+                    <div className="flex flex-wrap items-center gap-2 text-mono-sm text-ash">
                       {p.stack.map((s) => (
                         <span key={s}>{s}</span>
                       ))}
