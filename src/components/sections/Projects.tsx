@@ -79,15 +79,15 @@ export function Projects() {
                           <span key={f} className="text-xs text-ash bg-ink px-2 py-1 rounded">{f}</span>
                         ))}
                       </div>
+                      <div className="flex flex-wrap gap-2 mt-3">
+                        {p.stack.map((s) => (
+                          <span key={s} className="text-xs text-blood bg-blood/10 px-2 py-1 rounded">{s}</span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                   <div className="mt-4 flex items-center justify-between">
-                    <div className="flex flex-wrap items-center gap-2 text-mono-sm text-ash">
-                      {p.stack.map((s) => (
-                        <span key={s}>{s}</span>
-                      ))}
-                      <span className="ml-2">{p.year}</span>
-                    </div>
+                    <span className="text-mono-sm text-ash">{p.year}</span>
                     {p.liveUrl && (
                       <a 
                         href={p.liveUrl} 
