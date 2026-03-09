@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { CustomCursor } from "@/components/CustomCursor";
+import { ThemeProvider } from "@/components/ThemeProvider";
 
 export const metadata: Metadata = {
   title: "INQ — Full Stack Developer & Systems Builder",
@@ -8,8 +9,6 @@ export const metadata: Metadata = {
   keywords: ["Full Stack Developer", "AI", "Next.js", "FastAPI", "Portfolio", "INQ"],
   authors: [{ name: "INQ" }],
 };
-
-import { ThemeProvider } from "@/components/ThemeProvider";
 
 export default function RootLayout({
   children,
@@ -19,6 +18,8 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <script
           dangerouslySetInnerHTML={{
             __html: `
@@ -35,11 +36,10 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className="antialiased transition-colors duration-500">
+      <body className="antialiased">
         <ThemeProvider>
           <CustomCursor />
           {children}
-          <div className="grain-overlay" aria-hidden="true" />
         </ThemeProvider>
       </body>
     </html>

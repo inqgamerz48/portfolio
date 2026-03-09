@@ -17,30 +17,11 @@ const stats = [
 export function Hero() {
   return (
     <section className="relative min-h-screen flex flex-col justify-end pb-0 px-6 lg:px-8 overflow-hidden">
-      {/* Animated background grid */}
-      <div className="grid-overlay" />
+      {/* Static grid overlay */}
+      <div className="grid-overlay-fixed" />
       
-      {/* Glow effects */}
+      {/* Glow effects - simplified */}
       <div className="crimson-glow" />
-      <div className="blue-glow" />
-      <div className="gold-glow" />
-      
-      {/* Floating orbs */}
-      <motion.div
-        animate={{ y: [-10, 10, -10] }}
-        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/4 left-1/4 w-32 h-32 bg-blood/10 rounded-full blur-3xl"
-      />
-      <motion.div
-        animate={{ y: [10, -10, 10] }}
-        transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-        className="absolute top-1/3 right-1/4 w-24 h-24 bg-flame/10 rounded-full blur-2xl"
-      />
-      <motion.div
-        animate={{ y: [-15, 15, -15] }}
-        transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-        className="absolute bottom-1/3 left-1/3 w-40 h-40 bg-ember/8 rounded-full blur-3xl"
-      />
 
       {/* Gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-void/50 to-void" />
@@ -53,11 +34,7 @@ export function Hero() {
           transition={{ duration: 0.6, delay: 0.3 }}
           className="mb-4 flex items-center gap-3"
         >
-          <motion.span 
-            animate={{ scale: [1, 1.3, 1] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-2 h-2 bg-green rounded-full"
-          />
+          <span className="w-2 h-2 bg-green rounded-full animate-pulse" />
           <span className="text-mono-sm text-mist">{tagline}</span>
         </motion.div>
 
@@ -151,26 +128,6 @@ export function Hero() {
           ))}
         </motion.div>
       </div>
-
-      {/* Scroll indicator */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 2.5 }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
-      >
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="w-6 h-10 border-2 border-mist/30 rounded-full flex justify-center"
-        >
-          <motion.div 
-            animate={{ y: [0, 12, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="w-1 h-2 bg-mist/50 rounded-full mt-2"
-          />
-        </motion.div>
-      </motion.div>
     </section>
   )
 }

@@ -162,25 +162,15 @@ select {
     GRID OVERLAY
     ═══════════════════════════════════════ */
 
-@keyframes grid-move {
-  0% {
-    transform: translateY(0);
-  }
-  100% {
-    transform: translateY(60px);
-  }
-}
-
 .grid-overlay {
   position: absolute;
   inset: 0;
   pointer-events: none;
   background-image:
-    linear-gradient(rgba(232, 228, 240, 0.03) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(232, 228, 240, 0.03) 1px, transparent 1px);
+    linear-gradient(rgba(232, 228, 240, 0.02) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(232, 228, 240, 0.02) 1px, transparent 1px);
   background-size: 60px 60px;
-  mask-image: radial-gradient(ellipse 80% 70% at 50% 50%, black 20%, transparent 80%);
-  animation: grid-move 20s linear infinite;
+  mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, black 30%, transparent 80%);
 }
 
 .grid-overlay-fixed {
@@ -234,9 +224,8 @@ select {
   height: 200%;
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.025;
+  opacity: 0.015;
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  animation: grain 8s steps(10) infinite;
 }
 
 /* ═══════════════════════════════════════
@@ -425,20 +414,7 @@ select {
   right: -15%;
   width: 60%;
   height: 80%;
-  background: radial-gradient(ellipse, rgba(196, 18, 48, 0.15) 0%, transparent 70%);
-  animation: pulse-glow 8s ease-in-out infinite;
-}
-
-.crimson-glow::after {
-  content: '';
-  position: absolute;
-  bottom: -20%;
-  left: -10%;
-  width: 40%;
-  height: 60%;
-  background: radial-gradient(ellipse, rgba(255, 61, 82, 0.08) 0%, transparent 60%);
-  animation: float-glow 12s ease-in-out infinite;
-  animation-delay: -4s;
+  background: radial-gradient(ellipse, rgba(196, 18, 48, 0.12) 0%, transparent 70%);
 }
 
 .blue-glow {
@@ -455,9 +431,7 @@ select {
   left: -20%;
   width: 50%;
   height: 50%;
-  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.08) 0%, transparent 60%);
-  animation: float-glow 15s ease-in-out infinite;
-  animation-delay: -6s;
+  background: radial-gradient(ellipse, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
 }
 
 .gold-glow {
@@ -474,9 +448,7 @@ select {
   right: 10%;
   width: 30%;
   height: 40%;
-  background: radial-gradient(ellipse, rgba(212, 168, 83, 0.06) 0%, transparent 60%);
-  animation: float-glow 10s ease-in-out infinite;
-  animation-delay: -3s;
+  background: radial-gradient(ellipse, rgba(212, 168, 83, 0.05) 0%, transparent 60%);
 }
 
 @keyframes pulse-glow {
