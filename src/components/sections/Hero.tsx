@@ -45,7 +45,7 @@ export function Hero() {
           initial={{ opacity: 0, y: 10 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 1 }}
-          className="mt-6 max-w-md text-mist leading-relaxed"
+          className="mt-4 md:mt-6 max-w-lg text-sm md:text-base text-mist leading-relaxed"
         >
           {subhead}
         </motion.p>
@@ -89,8 +89,8 @@ export function Hero() {
               key={stat.label}
               className={`py-6 text-center ${i > 0 ? 'border-l border-parchment/[0.06]' : ''}`}
             >
-              <p className="font-display text-2xl md:text-3xl text-parchment tracking-wider">{stat.num}</p>
-              <p className="text-mono-sm text-ash mt-1">{stat.label}</p>
+              <p className="font-display text-xl md:text-2xl text-parchment tracking-wider">{stat.num}</p>
+              <p className="text-mono-sm text-ash mt-0.5">{stat.label}</p>
             </div>
           ))}
         </motion.div>
