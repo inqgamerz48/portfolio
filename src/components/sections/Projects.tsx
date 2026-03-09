@@ -10,7 +10,7 @@ const staticProjects = [
     description: 'A restaurant that needed to fill tables, not just look good online.',
     stack: ['Website'],
     year: '2026',
-    image: '/projects/ember-ash.svg',
+    image: '/projects/ss1.PNG',
     liveUrl: 'https://inq-restaurant-demo.vercel.app/',
   },
   {
@@ -19,7 +19,7 @@ const staticProjects = [
     description: 'Real estate that needed to look as premium as its listings.',
     stack: ['Website'],
     year: '2026',
-    image: '/projects/meridian-properties.svg',
+    image: '/projects/ss2.PNG',
     liveUrl: 'https://inq-realestate-demo.vercel.app/',
   },
   {
@@ -28,7 +28,7 @@ const staticProjects = [
     description: 'A small business drowning in spreadsheets needed a real system.',
     stack: ['Web App'],
     year: '2026',
-    image: '/projects/biztrackr.svg',
+    image: '/projects/ss4.PNG',
     liveUrl: 'https://biztrackr-grand-enterprise.vercel.app/',
   },
 ]
